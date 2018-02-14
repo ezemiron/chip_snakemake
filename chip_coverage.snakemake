@@ -1,0 +1,138 @@
+import yaml
+import os
+import inspect
+import re
+
+filename = inspect.getframeinfo(inspect.currentframe()).filename
+path = os.path.dirname(os.path.abspath(filename))
+
+include: config["chip_snake"]
+
+with open(config['chip_config']) as c:
+    config.update(yaml.load(c))
+
+
+
+def get_all(config):
+    regex_means = '%s/means/%s_%s_%s_%s.txt'
+    regex_window = '%s/window/%s_%s_%s_%s.txt.gz'
+    for bed in config['bed_summary']:
+        for experiment in config['experiment']:
+            exp_dict = config['experiment'][experiment]
+            for target in exp_dict:
+                target_dict = exp_dict[target]
+                for sample in target_dict:
+                    yield(regex_means % (config['outdir'], bed, experiment,
+                                         target, sample))
+    for bed in config['bed_window']:
+        for experiment in config['experiment']:
+            exp_dict = config['experiment'][experiment]
+            for target in exp_dict:
+                target_dict = exp_dict[target]
+                for sample in target_dict:
+                    yield(regex_window % (config['outdir'], bed, experiment,
+                                         target, sample))
+
+
+def get_bw(config, wildcards):
+    exp_dict = config['experiment'][wildcards.experiment]
+    rep_list = exp_dict[wildcards.target][wildcards.sample]
+    for r in range(0,len(rep_list)):
+        yield('%s/tracks/%s/%s_%s_r%i_%s_fcoc.bw' % (config['outdir'],
+                                                      wildcards.experiment,
+                                                      wildcards.target,
+                                                      wildcards.sample,
+                                                      r + 1, rep_list[r]))
+
+rule all_chip:
+    input:
+        get_all(config)
+
+
+
+rule compute_matrix:
+    input:
+        bw=lambda wildcards: list(get_bw(config, wildcards)),
+        bed=lambda wildcards: config['bed_window'][wildcards.bed]
+    params:
+        a=lambda wildcards: config['window_params'][wildcards.bed]['a'],
+        b=lambda wildcards: config['window_params'][wildcards.bed]['b'],
+        refpoint=lambda wildcards: config['window_params'][wildcards.bed]['refpoint'],
+        bs=lambda wildcards: config['window_params'][wildcards.bed]['binsize']
+    output:
+        '{outdir}/window/{bed}_{experiment}_{target}_{sample}.txt.gz'
+    shell:
+        "computeMatrix reference-point -S {input.bw} -R {input.bed} "
+        "                              --missingDataAsZero"
+        "                              --referencePoint {params.refpoint}"
+        "                              -o {output}"
+        "                              -bs {params.bs}"
+        "                              -a {params.a} -b {params.b}"
+
+
+def get_exp(config, wildcards):
+    exp_dict = config['experiment'][wildcards.experiment]
+    rep_list = exp_dict[wildcards.target][wildcards.sample]
+    for r in range(0,len(rep_list)):
+        yield('%s/mapping/%s/%s_%s_r%i_%s.bam' % (config['outdir'],
+                                                  wildcards.experiment,
+                                                  wildcards.target,
+                                                  wildcards.sample,
+                                                  r + 1, rep_list[r]))
+
+def get_exp_label(config, wildcards):
+    exp_dict = config['experiment'][wildcards.experiment]
+    rep_list = exp_dict[wildcards.target][wildcards.sample]
+    for r in range(0,len(rep_list)):
+        yield('%s_%s_%s_r%i_%s' % (wildcards.experiment, wildcards.target,
+                                   wildcards.sample, r + 1, rep_list[r]))
+
+
+def get_input(config, wildcards):
+    ip_dict = config['control'][wildcards.experiment]
+    srr_list = ip_dict[wildcards.target][wildcards.sample]
+    srr_str = '_'.join(srr_list)
+    return('%s/mapping/control/%s.bam' % (wildcards.outdir, srr_str))
+
+
+rule means:
+    input:
+        bed=lambda wildcards: config['bed_summary'][wildcards.bed],
+        exp=lambda wildcards: get_exp(config, wildcards),
+        ip=lambda wildcards: get_input(config, wildcards),
+        counts='{outdir}/counts/{bed}_{experiment}_{target}_{sample}.txt'
+    output:
+        '{outdir}/means/{bed}_{experiment}_{target}_{sample}.txt'
+    run:
+        input_exp = ','.join(input.exp)
+        shell("{path}/scripts/compute_means.R --exp {input_exp} --bed {input.bed}"
+              "                               --counts {input.counts}"
+              "                               --input {input.ip} > {output}")
+
+
+
+rule multiBamSummary:
+    input:
+        bed=lambda wildcards: config['bed_summary'][wildcards.bed],
+        exp=lambda wildcards: get_exp(config, wildcards),
+        ip=lambda wildcards: get_input(config, wildcards),
+        exp_bai=lambda wildcards: ['%s.bai' % (s) for s in
+                                   get_exp(config, wildcards)],
+        ip_bai=lambda wildcards: '%s.bai' % (get_input(config, wildcards))
+    params:
+        exp_label=lambda wildcards: list(get_exp_label(config, wildcards))
+    output:
+        '{outdir}/counts/{bed}_{experiment}_{target}_{sample}.npz',
+        '{outdir}/counts/{bed}_{experiment}_{target}_{sample}.txt'
+    threads:
+        5
+    shell:
+        "multiBamSummary BED-file -p {threads}"
+        "                         --BED {input.bed}"
+        "                         -l Input {params.exp_label}"
+        "                         -b {input.ip} {input.exp}"
+        "                         -out {output[0]}"
+        "                         --outRawCounts {output[1]}"
+
+
+# samtools idxstats

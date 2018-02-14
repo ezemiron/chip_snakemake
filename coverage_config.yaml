@@ -1,0 +1,28 @@
+outdir:
+    '/DATA/usr/c.leemans/projects/chip_snake/test_coverage'
+
+bed_summary:
+    gencode.v27_tssr:
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/tssr_gene_body/gencode.v27_tss.bed'
+    gencode.v27_body:
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/tssr_gene_body/gencode.v27_gene_body.bed'
+
+bed_window:
+    gencode.v27:
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/selection/gencode.v27_fantom_selection.bed'
+
+window_params:
+    gencode.v27:
+        a: 22000
+        b: 22000
+        binsize: 200
+        refpoint: TSS
+
+
+chip_dir:
+    '/DATA/usr/c.leemans/projects/chip_snake/'
+
+chip_config:
+    '/DATA/usr/c.leemans/projects/chip_snake/config.yaml'
+chip_snake:
+    '/DATA/usr/c.leemans/projects/chip_snake/sra_download.snakemake'

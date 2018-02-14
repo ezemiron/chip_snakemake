@@ -1,0 +1,60 @@
+outdir:
+    /DATA/usr/c.leemans/projects/chip_snake
+
+experiment:
+    Snyder2016:
+        POL2:
+            ENCSR388QZF:
+                [SRR5111542, SRR5111543]
+            ENCSR031TFS:
+                [SRR5112448, SRR5112449]
+    # Salzberg2017:
+    #     H3K9me2:
+    #         GSM1846169:
+    #             [SRR2148301, SRR3503803, SRR3503783]
+    #         UNC0638:
+    #             [SRR2148302, SRR3503784]
+    #     H3K9me3:
+    #         GSM1846192:
+    #             [SRR2148320]
+    #     H3.C-tail:
+    #         GSM1846180:
+    #             [SRR2148312]
+
+control:
+    Snyder2016:
+        POL2:
+            ENCSR388QZF:
+                [SRR5111209, SRR5111210]
+            ENCSR031TFS:
+                [SRR5111209, SRR5111210]
+    # Salzberg2017:
+    #     H3K9me2:
+    #         GSM1846169:
+    #             [SRR2148307, SRR3503802]
+    #         UNC0638:
+    #             [SRR2148313]
+    #     H3K9me3:
+    #         GSM1846192:
+    #             [SRR2148307, SRR3503802]
+    #     H3.C-tail:
+    #         GSM1846180:
+    #             [SRR2148307, SRR3503802]
+
+is_paired:
+    Snyder2016:
+        POL2:
+            ENCSR388QZF:
+                [True, True]
+            ENCSR031TFS:
+                [True, True]
+
+
+replicate_cor_method:
+    'pearson'
+
+min_mapq:
+    30
+
+bowtie_index:
+    '/DATA/data/human/hg38/index/bowtie2/hg38_1-22_XYM'

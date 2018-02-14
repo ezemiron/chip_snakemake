@@ -1,0 +1,234 @@
+
+configfile: "config.yaml"
+
+def get_all(config):
+    regex = '%s/tracks/%s/%s_%s_r%i_%s_fcoc.bw'
+    for experiment in config['experiment']:
+        exp_dict = config['experiment'][experiment]
+        for target in exp_dict:
+            target_dict = exp_dict[target]
+            for sample in target_dict:
+                rep_list = target_dict[sample]
+                for rep in range(0, len(rep_list)):
+                    yield(regex % (config['outdir'], experiment,
+                                   target, sample, rep+1, rep_list[rep]))
+                    # yield('stats/%s/%s_%s_scatter.pdf' % (experiment, target,
+                    #                                       sample))
+
+
+rule all:
+    input:
+        get_all(config)
+
+#
+# rule plot_correlation:
+#     input:
+#         'stats/{experiment}/{target}_{sample}.npz'
+#     output:
+#         'stats/{experiment}/{target}_{sample}_scatter.pdf'
+#     params:
+#         cor_method=config['replicate_cor_method']
+#     shell:
+#         "plotCorrelation --corData {input} "
+#         "                --plotFile {output} "
+#         "                --corMethod {params.cor_method} "
+#         "                -p scatterplot"
+#
+#
+# def get_compare_input(config, wildcards):
+#     target_dict = config['experiment'][wildcards.experiment][wildcards.target]
+#     rep_list = target_dict[wildcards.sample]
+#     for rep in range(0, len(rep_list)):
+#         yield('mapping/%s/%s_%s_r%i_%s.bam' % (wildcards.experiment,
+#                                                      wildcards.target,
+#                                                      wildcards.sample,
+#                                                      rep+1, rep_list[rep]))
+#
+#
+#
+#
+# rule compare_replicates:
+#     input:
+#         bam=lambda wildcards: get_compare_input(config, wildcards),
+#         bai=lambda wildcards: [''.join((name, '.bai')) for name in
+#                                get_compare_input(config, wildcards)]
+#     output:
+#         'stats/{experiment}/{target}_{sample}.npz'
+#     params:
+#         min_mapq = config['min_mapq']
+#     threads:
+#         10
+#     shell:
+#         "multiBamSummary bins --bamfiles {input.bam} "
+#         "                     --minMappingQuality {params.min_mapq} "
+#         "                     -bs 50 "
+#         "                     -p {threads} "
+#         "                     -out {output} "
+# ruleorder: bamcompare > coverage
+#
+# rule coverage:
+#     input:
+#         bam='mapping/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam',
+#         bai='mapping/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam.bai'
+#     output:
+#         'tracks/{experiment}/{target}_{sample}_{rep}_{srr_id}.bw'
+#     params:
+#         min_mapq = config['min_mapq']
+#     threads:
+#         10
+#     shell:
+#         "bamCoverage --minMappingQuality {params.min_mapq} "
+#         "            -bs 1 "
+#         "            -p {threads} "
+#         "            -b {input.bam} "
+#         "            -o {output} "
+
+
+def get_compare_ctrl(config, wildcards):
+    rep = int(wildcards.rep.replace('r', '')) - 1
+    target_dict = config['control'][wildcards.experiment][wildcards.target]
+    srr_id = '_'.join(target_dict[wildcards.sample])
+    return(['%s/mapping/control/%s.bam' % (wildcards.outdir, srr_id),
+            '%s/mapping/control/%s.bam.bai' % (wildcards.outdir, srr_id)])
+
+rule bamcompare:
+    input:
+        bam='{outdir}/mapping/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam',
+        bai='{outdir}/mapping/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam.bai',
+        ctrl=lambda wildcards: get_compare_ctrl(config, wildcards)
+    output:
+        '{outdir}/tracks/{experiment}/{target}_{sample}_{rep}_{srr_id}_fcoc.bw'
+    log:
+        '{outdir}/log/tracks/{experiment}/{target}_{sample}_{rep}_{srr_id}_fcoc.log'
+    params:
+        min_mapq = config['min_mapq']
+    threads:
+        10
+    shell:
+        "bamCompare --minMappingQuality {params.min_mapq} "
+        "           --ratio ratio "
+        "           --pseudocount 1"
+        "           -p {threads} "
+        "           -bs 1"
+        "           -b1 {input.bam} "
+        "           -b2 {input.ctrl[0]} "
+        "           -of bigwig "
+        "           -o {output} > {log} 2>&1"
+
+ruleorder: mergeCtrl > markdup
+
+rule mergeCtrl:
+    input:
+        lambda wildcards: ['%s/mapping/control/%s.bam' % (wildcards.outdir, srr_id)
+                           for srr_id in wildcards.id_list.split('_')]
+    output:
+        '{outdir}/mapping/control/{id_list, .*_.*}.bam'
+    threads:
+        10
+    shell:
+        "sambamba merge -t {threads} {output} {input}"
+
+rule index:
+    input:
+        '{outdir}/mapping/{folder}/{file}.bam'
+    output:
+        '{outdir}/mapping/{folder}/{file}.bam.bai'
+    threads:
+        5
+    shell:
+        "sambamba index -t {threads} {input}"
+
+def get_align_input(config, wildcards, is_control=False):
+
+    if is_control:
+        for exp in config['control']:
+            for t in config['control'][exp]:
+                for s in config['control'][exp][t]:
+                    sample_dict = config['control'][exp][t][s]
+                    if wildcards.srr_id in sample_dict:
+                        experiment = exp
+                        target = t
+                        sample = s
+                        rep = sample_dict.index(wildcards.srr_id)
+    else:
+        experiment = wildcards.experiment
+        target = wildcards.target
+        sample = wildcards.sample
+        rep = int(wildcards.rep.replace('r', '')) - 1
+    is_paired = config['is_paired'][experiment][target]
+    if is_paired[sample][rep]:
+        regex_list = ['%s/raw_data/%s_1.fastq.gz',
+                      '%s/raw_data/%s_2.fastq.gz']
+    else:
+        regex_list = ['%s/raw_data/%s.fastq.gz']
+    return(regex % (wildcards.outdir, wildcards.srr_id)
+           for regex in regex_list)
+
+
+def run_align(input, threads, genome, min_mapq, output):
+    if len(input) is 1:
+        bowtie=("bowtie2 --no-unal -p {threads} -x {genome} -U {input}")
+    else:
+        bowtie=("bowtie2 --no-unal -p {threads} -x {genome} -1 {input[0]} "
+                "        -2 {input[1]} | awk '{{if ($7==\"=\" || $1 ~ /^@/)"
+                "                               {{print $0}}}}'")
+    view = ("sambamba view -S -F \"mapping_quality >= {min_mapq}\" -f bam "
+            "--compression-level=0 /dev/stdin ")
+    sort = "sambamba sort -o {output} --compression-level=0 /dev/stdin "
+    shell(' | '.join((bowtie, view,  sort)))
+
+
+rule markdup:
+    input:
+        '{outdir}/mapping/{dir}/{file}.bam.tmp'
+    output:
+        '{outdir}/mapping/{dir}/{file}.bam'
+    threads:
+        10
+    shell:
+        "sambamba markdup -r {input} {output} "
+
+rule align:
+    input:
+        lambda wildcards: get_align_input(config, wildcards)
+    params:
+        genome=config['bowtie_index'],
+        min_mapq=config['min_mapq']
+    output:
+        temp('{outdir}/mapping/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam.tmp')
+    threads:
+        10
+    run:
+        run_align(input, threads, params.genome, params.min_mapq, output)
+
+rule align_control:
+    input:
+        lambda wildcards: get_align_input(config, wildcards, is_control=True)
+    params:
+        genome=config['bowtie_index'],
+        min_mapq=config['min_mapq']
+    output:
+        '{outdir}/mapping/control/{srr_id, [^_]+}.bam'
+    threads:
+        10
+    run:
+        run_align(input, threads, params.genome, params.min_mapq, output)
+
+ruleorder: download_paired_sra > download_single_sra
+
+rule download_paired_sra:
+    output:
+        '{outdir}/raw_data/{srr_id}_1.fastq.gz',
+        '{outdir}/raw_data/{srr_id}_2.fastq.gz'
+    params:
+        srr_id='{srr_id}',
+        out='raw_data/'
+    shell:
+        "fastq-dump --split-files -O {params.out} --gzip {params.srr_id}"
+
+rule download_single_sra:
+    output: '{outdir}/raw_data/{srr_id}.fastq.gz'
+    params:
+        srr_id='{srr_id}'
+    shell:
+        "fastq-dump --gzip {params.srr_id} > {output}"
