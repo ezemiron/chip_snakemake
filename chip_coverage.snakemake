@@ -15,7 +15,7 @@ with open(config['chip_config']) as c:
 
 def get_all(config):
     regex_means = '%s/means/%s_%s_%s_%s.txt'
-    regex_window = '%s/window/%s_%s_%s_%s.txt.gz'
+    regex_window = '%s/window/%s_%s_%s_r%i_%s.txt.gz'
     for bed in config['bed_summary']:
         for experiment in config['experiment']:
             exp_dict = config['experiment'][experiment]
@@ -30,19 +30,21 @@ def get_all(config):
             for target in exp_dict:
                 target_dict = exp_dict[target]
                 for sample in target_dict:
-                    yield(regex_window % (config['outdir'], bed, experiment,
-                                         target, sample))
+                    for r in range(0, len(target_dict[sample])):
+                        yield(regex_window % (config['outdir'], bed, experiment,
+                                             target, r + 1, sample))
 
 
 def get_bw(config, wildcards):
     exp_dict = config['experiment'][wildcards.experiment]
+    r = int(wildcards.rep.replace('r', '')) - 1
     rep_list = exp_dict[wildcards.target][wildcards.sample]
-    for r in range(0,len(rep_list)):
-        yield('%s/tracks/%s/%s_%s_r%i_%s_fcoc.bw' % (config['outdir'],
-                                                      wildcards.experiment,
-                                                      wildcards.target,
-                                                      wildcards.sample,
-                                                      r + 1, rep_list[r]))
+    yield('%s/tracks/%s/%s_%s_%s_%s_fcoc.bw' % (config['outdir'],
+                                                  wildcards.experiment,
+                                                  wildcards.target,
+                                                  wildcards.sample,
+                                                  wildcards.rep,
+                                                  rep_list[r]))
 
 rule all_chip:
     input:
@@ -60,12 +62,15 @@ rule compute_matrix:
         refpoint=lambda wildcards: config['window_params'][wildcards.bed]['refpoint'],
         bs=lambda wildcards: config['window_params'][wildcards.bed]['binsize']
     output:
-        '{outdir}/window/{bed}_{experiment}_{target}_{sample}.txt.gz'
+        '{outdir}/window/{bed}_{experiment}_{target}_{rep}_{sample}.txt.gz'
+    threads:
+        5
     shell:
         "computeMatrix reference-point -S {input.bw} -R {input.bed} "
         "                              --missingDataAsZero"
         "                              --referencePoint {params.refpoint}"
         "                              -o {output}"
+        "                              -p {threads}"
         "                              -bs {params.bs}"
         "                              -a {params.a} -b {params.b}"
 

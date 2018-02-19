@@ -59,7 +59,7 @@ match_vec = match(paste(bed_table[,1], bed_table[,2]),
                   paste(count_table[,1], count_table[,2]))
 
 mean_table = data.frame(transcript_id=rownames(bed_table),
-                        mean=log10(mean_vec),
-                        gm_mean=log10(gm_mean_vec))
+                        mean=log10(mean_vec[match_vec]),
+                        gm_mean=log10(gm_mean_vec[match_vec]))
 
 write.table(mean_table, quote=F, sep='\t', row.names=F)

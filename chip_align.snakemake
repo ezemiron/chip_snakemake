@@ -20,6 +20,10 @@ rule all:
     input:
         get_all(config)
 
+
+
+
+
 #
 # rule plot_correlation:
 #     input:
@@ -156,7 +160,7 @@ def get_align_input(config, wildcards, is_control=False):
         sample = wildcards.sample
         rep = int(wildcards.rep.replace('r', '')) - 1
     is_paired = config['is_paired'][experiment][target]
-    if is_paired[sample][rep]:
+    if is_paired[sample]:
         regex_list = ['%s/raw_data/%s_1.fastq.gz',
                       '%s/raw_data/%s_2.fastq.gz']
     else:
@@ -208,7 +212,7 @@ rule align_control:
         genome=config['bowtie_index'],
         min_mapq=config['min_mapq']
     output:
-        '{outdir}/mapping/control/{srr_id, [^_]+}.bam'
+        '{outdir}/mapping/control/{srr_id, [^_]+}.bam.tmp'
     threads:
         10
     run:
@@ -229,6 +233,7 @@ rule download_paired_sra:
 rule download_single_sra:
     output: '{outdir}/raw_data/{srr_id}.fastq.gz'
     params:
-        srr_id='{srr_id}'
+        srr_id='{srr_id}',
+        out='raw_data/'
     shell:
-        "fastq-dump --gzip {params.srr_id} > {output}"
+        "fastq-dump -O {params.out} --gzip {params.srr_id}"

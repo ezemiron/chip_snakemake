@@ -8,6 +8,10 @@ experiment:
                 [SRR5111542, SRR5111543]
             ENCSR031TFS:
                 [SRR5112448, SRR5112449]
+    Snyder2012:
+        POL2AS2:
+            ENCSR000EGF:
+                [SRR502194, SRR502195]
     # Salzberg2017:
     #     H3K9me2:
     #         GSM1846169:
@@ -20,6 +24,17 @@ experiment:
     #     H3.C-tail:
     #         GSM1846180:
     #             [SRR2148312]
+    Stamatoyannopoulos2011:
+        H3K36me3:
+            ENCSR000DWB:
+                [SRR577540, SRR577541]
+    Schmidl2015:
+        H3K27ME3:
+            chipmentation:
+                [SRR2085903, SRR2085904]
+            chipseq:
+                [SRR2085893, SRR2085894]
+
 
 control:
     Snyder2016:
@@ -28,6 +43,10 @@ control:
                 [SRR5111209, SRR5111210]
             ENCSR031TFS:
                 [SRR5111209, SRR5111210]
+    Snyder2012:
+        POL2AS2:
+            ENCSR000EGF:
+                [SRR502641]
     # Salzberg2017:
     #     H3K9me2:
     #         GSM1846169:
@@ -40,14 +59,42 @@ control:
     #     H3.C-tail:
     #         GSM1846180:
     #             [SRR2148307, SRR3503802]
+    Stamatoyannopoulos2011:
+        H3K36me3:
+            ENCSR000DWB:
+                [SRR577521]
+    Schmidl2015:
+        H3K27ME3:
+            chipmentation:
+                [SRR2085912, SRR2085913, SRR2085914]
+            chipseq:
+                [SRR2085897, SRR2085898]
+
 
 is_paired:
     Snyder2016:
         POL2:
-            ENCSR388QZF:
-                [True, True]
-            ENCSR031TFS:
-                [True, True]
+            ENCSR388QZF: True
+            ENCSR031TFS: True
+    Snyder2012:
+        POL2AS2:
+            ENCSR000EGF: False
+    Salzberg2017:
+        H3K9me2:
+            GSM1846169: False
+            UNC0638: False
+        H3K9me3:
+            GSM1846192: False
+        H3.C-tail:
+            GSM1846180: False
+    Stamatoyannopoulos2011:
+        H3K36me3:
+            ENCSR000DWB: False
+    Schmidl2015:
+        H3K27ME3:
+            chipmentation: False
+            chipseq: False
+
 
 
 replicate_cor_method:
