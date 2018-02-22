@@ -17,23 +17,25 @@ with open(config['chip_config']) as c:
 def get_all(config):
     regex_means = '%s/means/%s_%s_%s_%s.txt'
     regex_window = '%s/window/%s_%s_%s_r%i_%s.txt.gz'
-    for bed in config['bed_summary']:
-        for experiment in config['experiment']:
-            exp_dict = config['experiment'][experiment]
-            for target in exp_dict:
-                target_dict = exp_dict[target]
-                for sample in target_dict:
-                    yield(regex_means % (config['outdir'], bed, experiment,
-                                         target, sample))
-    for bed in config['bed_window']:
-        for experiment in config['experiment']:
-            exp_dict = config['experiment'][experiment]
-            for target in exp_dict:
-                target_dict = exp_dict[target]
-                for sample in target_dict:
-                    for r in range(0, len(target_dict[sample])):
-                        yield(regex_window % (config['outdir'], bed, experiment,
-                                             target, r + 1, sample))
+    if 'bed_summary' in config:
+        for bed in config['bed_summary']:
+            for experiment in config['experiment']:
+                exp_dict = config['experiment'][experiment]
+                for target in exp_dict:
+                    target_dict = exp_dict[target]
+                    for sample in target_dict:
+                        yield(regex_means % (config['outdir'], bed, experiment,
+                                             target, sample))
+    if 'bed_window' in config:
+        for bed in config['bed_window']:
+            for experiment in config['experiment']:
+                exp_dict = config['experiment'][experiment]
+                for target in exp_dict:
+                    target_dict = exp_dict[target]
+                    for sample in target_dict:
+                        for r in range(0, len(target_dict[sample])):
+                            yield(regex_window % (config['outdir'], bed, experiment,
+                                                 target, r + 1, sample))
 
 
 def get_bw(config, wildcards):
