@@ -42,7 +42,7 @@ def get_bw(config, wildcards):
     exp_dict = config['experiment'][wildcards.experiment]
     r = int(wildcards.rep.replace('r', '')) - 1
     rep_list = exp_dict[wildcards.target][wildcards.sample]
-    yield('%s/tracks/%s/%s_%s_%s_%s_fcoc.bw' % (config['outdir'],
+    yield('%s/tracks/%s/%s_%s_%s_%s_fcoc.bw' % (config['chip_out'],
                                                   wildcards.experiment,
                                                   wildcards.target,
                                                   wildcards.sample,
@@ -82,7 +82,7 @@ def get_exp(config, wildcards):
     exp_dict = config['experiment'][wildcards.experiment]
     rep_list = exp_dict[wildcards.target][wildcards.sample]
     for r in range(0,len(rep_list)):
-        yield('%s/mapping/%s/%s_%s_r%i_%s.bam' % (config['outdir'],
+        yield('%s/mapping/%s/%s_%s_r%i_%s.bam' % (config['chip_out'],
                                                   wildcards.experiment,
                                                   wildcards.target,
                                                   wildcards.sample,
@@ -100,7 +100,7 @@ def get_input(config, wildcards):
     ip_dict = config['control'][wildcards.experiment]
     srr_list = ip_dict[wildcards.target][wildcards.sample]
     srr_str = '_'.join(srr_list)
-    return('%s/mapping/control/%s.bam' % (wildcards.outdir, srr_str))
+    return('%s/mapping/control/%s.bam' % (config['chip_out'], srr_str))
 
 
 rule means:
