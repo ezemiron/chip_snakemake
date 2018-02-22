@@ -10,7 +10,7 @@ def get_all(config):
             for sample in target_dict:
                 rep_list = target_dict[sample]
                 for rep in range(0, len(rep_list)):
-                    yield(regex % (config['outdir'], experiment,
+                    yield(regex % (config['chip_out'], experiment,
                                    target, sample, rep+1, rep_list[rep]))
                     # yield('stats/%s/%s_%s_scatter.pdf' % (experiment, target,
                     #                                       sample))

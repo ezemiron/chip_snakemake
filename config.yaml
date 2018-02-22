@@ -1,4 +1,4 @@
-outdir:
+chip_out:
     /DATA/usr/c.leemans/projects/chip_snake
 
 experiment:
