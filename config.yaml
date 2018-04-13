@@ -2,100 +2,338 @@ chip_out:
     /DATA/usr/c.leemans/projects/chip_snake
 
 experiment:
-    Snyder2016:
-        POL2:
-            ENCSR388QZF:
-                [SRR5111542, SRR5111543]
-            ENCSR031TFS:
-                [SRR5112448, SRR5112449]
-    Snyder2012:
-        POL2AS2:
-            ENCSR000EGF:
-                [SRR502194, SRR502195]
-    # Salzberg2017:
-    #     H3K9me2:
-    #         GSM1846169:
-    #             [SRR2148301, SRR3503803, SRR3503783]
-    #         UNC0638:
-    #             [SRR2148302, SRR3503784]
-    #     H3K9me3:
-    #         GSM1846192:
-    #             [SRR2148320]
-    #     H3.C-tail:
-    #         GSM1846180:
-    #             [SRR2148312]
-    Stamatoyannopoulos2011:
-        H3K36me3:
-            ENCSR000DWB:
-                [SRR577540, SRR577541]
-    Schmidl2015:
-        H3K27ME3:
-            chipmentation:
-                [SRR2085903, SRR2085904]
-            chipseq:
-                [SRR2085893, SRR2085894]
+    K562:
+        Struhl2011:
+            NELFE:
+                ENCSR000DOF:
+                    treatment:
+                        [SRR502172, SRR502173]
+                    control:
+                        [SRR502109, SRR502110]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    is_paired: False
+            CCNT2:
+                ENCSR000DOA:
+                    treatment:
+                        [SRR502498, SRR502499]
+                    control:
+                        [SRR502109, SRR502110]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    is_paired: False
+        Snyder2016:
+            POL2:
+                ENCSR388QZF:
+                    treatment:
+                        [SRR5111542, SRR5111543]
+                    control:
+                        [SRR5111209, SRR5111210]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    is_paired: False
+                ENCSR031TFS:
+                    treatment:
+                        [SRR5112448, SRR5112449]
+                    control:
+                        [SRR5111209, SRR5111210]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    is_paired: False
+        Snyder2012:
+            POL2AS2:
+                ENCSR000EGF:
+                    treatment:
+                        [SRR502194, SRR502195]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    is_paired: False
+            MYC:
+                ENCSR000EGJ:
+                    treatment:
+                        [SRR502421, SRR502422]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    is_paired: False
+        Liu2018:
+            H3K9me2:
+                ab1220:
+                    treatment:
+                        [SRR5287112, SRR5287113]
+                    control:
+                        [SRR5287120, SRR5287121]
+                    source: GEO
+                    SOFA: H3K9_dimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+            H3K9me3:
+                ab1220:
+                    treatment:
+                        [SRR5287116, SRR5287117]
+                    control:
+                        [SRR5287120, SRR5287121]
+                    source: GEO
+                    SOFA: H3K9_trimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+                ab8898:
+                    treatment:
+                        [SRR5287100, SRR5287101]
+                    control:
+                        [SRR5287106, SRR5287107]
+                    source: GEO
+                    SOFA: H3K9_trimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+        Stamatoyannopoulos2011:
+            H3K36me3:
+                ENCSR000DWB:
+                    treatment:
+                        [SRR577540, SRR577541]
+                    control:
+                        [SRR577521]
+                    source: GEO
+                    SOFA: H3K36_trimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+        Schmidl2015:
+            H3K27ME3:
+                chipmentation:
+                    treatment:
+                        [SRR2085903, SRR2085904]
+                    control:
+                        [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
+                    source: GEO
+                    SOFA: H3K27_trimethylation_site
+                    keep_duplicates: True
+                    is_paired: False
+                chipseq:
+                    treatment:
+                        [SRR2085893, SRR2085894]
+                    control:
+                        [SRR2085862, SRR2085863, SRR2085864]
+                    source: GEO
+                    SOFA: H3K27_trimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+            H3K27AC:
+                chipmentation:
+                    treatment:
+                        [SRR2085875, SRR2085876]
+                    control:
+                        [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
+                    source: GEO
+                    SOFA: H3K27_acetylation_site
+                    keep_duplicates: True
+                    is_paired: False
+                chipseq:
+                    treatment:
+                        [SRR2085858]
+                    control:
+                        [SRR2085862, SRR2085863, SRR2085864]
+                    source: GEO
+                    SOFA: H3K27_acetylation_site
+                    keep_duplicates: False
+                    is_paired: False
+            H3K4ME1:
+                chipmentation:
+                    treatment:
+                        [SRR2085879, SRR2085880]
+                    control:
+                        [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
+                    source: GEO
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: True
+                    is_paired: False
+                chipseq:
+                    treatment:
+                        [SRR2085860, SRR2085861]
+                    control:
+                        [SRR2085862, SRR2085863, SRR2085864]
+                    source: GEO
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+        Ratnakumar2012:
+            macroH2A:
+                GSE35339:
+                    treatment:
+                        [SRR402382]
+                    control:
+                        [SRR402383]
+                    source: GEO
+                    SOFA: histone_modification
+                    keep_duplicates: False
+                    is_paired: False
+        Fu2013:
+            H3K79me2:
+                GSM865283:
+                    treatment:
+                        [SRR401813]
+                    control:
+                        [SRR401814]
+                    source: GEO
+                    SOFA: H3K79_dimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+        Bernstein2012:
+            EZH2:
+                ENCSR000AQE:
+                    treatment:
+                        [SRR568431, SRR568432]
+                    control:
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    is_paired: False
+            H3K79me2:
+                ENCSR000APD:
+                    treatment:
+                        [SRR227378, SRR227379]
+                    control:
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                    source: GEO
+                    SOFA: H3K79_dimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+            H4K20me1:
+                ENCSR000AKX:
+                    treatment:
+                        [SRR227427, SRR227428]
+                    control:
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                    source: GEO
+                    SOFA: H3K20_monomethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+            H3K9me3:
+                ENCSR000APE:
+                    treatment:
+                        [SRR227643, SRR227644]
+                    control:
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                    source: GEO
+                    SOFA: H3K9_trimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+        Bernstein2011:
+            H3K27me3:
+                ENCSR000AKQ:
+                    treatment:
+                        [SRR227389, SRR227390]
+                    control:
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                    source: GEO
+                    SOFA: H3K27_trimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+            H2AFZ:
+                ENCSR000APC:
+                    treatment:
+                        [SRR227661, SRR227662]
+                    control:
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                    source: GEO
+                    SOFA: H3K27_trimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+            H3K36me3:
+                ENCSR000AKR:
+                    treatment:
+                        [SRR227511, SRR227512]
+                    control:
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                    source: GEO
+                    SOFA: H3K27_trimethylation_site
+                    keep_duplicates: False
+                    is_paired: False
+    RPE:
+        Jeroen:
+            H3K4me3:
+                wz2105:
+                    treatment:
+                        [wz2105, wz1875]
+                    control:
+                        [wz1879]
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: False
+                    source: local
+                    is_paired: False
+            H3K27me3:
+                wz2106:
+                    treatment:
+                        [wz2106, wz1876]
+                    control:
+                        [wz1879]
+                    SOFA: H3K27_trimethylation_site
+                    keep_duplicates: False
+                    source: local
+                    is_paired: False
+            H3K9me3:
+                wz2107:
+                    treatment:
+                        [wz2107, wz1877]
+                    control:
+                        [wz1879]
+                    SOFA: H3K9_trimethylation_site
+                    keep_duplicates: False
+                    source: local
+                    is_paired: False
+            H3K4me1:
+                wz2108:
+                    treatment:
+                        [wz2108, wz1878]
+                    control:
+                        [wz1879]
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: False
+                    source: local
+                    is_paired: False
+            H3K36me3:
+                wz2109:
+                    treatment:
+                        [wz2109, wz1884]
+                    control:
+                        [wz1879]
+                    SOFA: H3K36_trimethylation_site
+                    keep_duplicates: False
+                    source: local
+                    is_paired: False
+        Anna:
+            H3K27me3:
+                H2BGFP:
+                    treatment:
+                        [wz2110]
+                    control:
+                        [wz1879]
+                    SOFA: H3K27_trimethylation_site
+                    keep_duplicates: False
+                    source: local
+                    is_paired: False
+
+forge:
+    /DATA/usr/c.leemans/data/forge/
 
 
-control:
-    Snyder2016:
-        POL2:
-            ENCSR388QZF:
-                [SRR5111209, SRR5111210]
-            ENCSR031TFS:
-                [SRR5111209, SRR5111210]
-    Snyder2012:
-        POL2AS2:
-            ENCSR000EGF:
-                [SRR502641]
-    # Salzberg2017:
-    #     H3K9me2:
-    #         GSM1846169:
-    #             [SRR2148307, SRR3503802]
-    #         UNC0638:
-    #             [SRR2148313]
-    #     H3K9me3:
-    #         GSM1846192:
-    #             [SRR2148307, SRR3503802]
-    #     H3.C-tail:
-    #         GSM1846180:
-    #             [SRR2148307, SRR3503802]
-    Stamatoyannopoulos2011:
-        H3K36me3:
-            ENCSR000DWB:
-                [SRR577521]
-    Schmidl2015:
-        H3K27ME3:
-            chipmentation:
-                [SRR2085912, SRR2085913, SRR2085914]
-            chipseq:
-                [SRR2085897, SRR2085898]
+domain_bins:
+    1000
 
+macs2_gsize: 'hs'
 
-is_paired:
-    Snyder2016:
-        POL2:
-            ENCSR388QZF: True
-            ENCSR031TFS: True
-    Snyder2012:
-        POL2AS2:
-            ENCSR000EGF: False
-    Salzberg2017:
-        H3K9me2:
-            GSM1846169: False
-            UNC0638: False
-        H3K9me3:
-            GSM1846192: False
-        H3.C-tail:
-            GSM1846180: False
-    Stamatoyannopoulos2011:
-        H3K36me3:
-            ENCSR000DWB: False
-    Schmidl2015:
-        H3K27ME3:
-            chipmentation: False
-            chipseq: False
-
-
+blacklist:
+    hg38: /DATA/usr/c.leemans/data/tracks/hg38/hg38_blacklist_ENCFF419RSJ.bed.gz
+    hg19: /DATA/usr/c.leemans/data/tracks/hg19/hg19_blacklist_ENCFF055QTV.bed.gz
 
 replicate_cor_method:
     'pearson'
@@ -103,5 +341,10 @@ replicate_cor_method:
 min_mapq:
     30
 
+chrom_sizes:
+    hg38: /DATA/data/human/hg38/genome/chromSizes_hg38_LP180129.txt
+    hg19: /DATA/data/genomes/hg19/hg19.chrom.sizes
+
 bowtie_index:
-    '/DATA/data/human/hg38/index/bowtie2/hg38_1-22_XYM'
+    hg38: '/DATA/data/human/hg38/index/bowtie2/hg38_1-22_XYM'
+    hg19: '/DATA/data/bowtie2/hg19_ch1-22_XYM'

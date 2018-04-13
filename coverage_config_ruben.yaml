@@ -1,0 +1,23 @@
+outdir:
+    '/DATA/usr/c.leemans/projects/chip_ruben/pipeline/'
+
+bed_summary:
+    20180205.RSTP2:
+        '/DATA/usr/r.schep/projects/CRISPR_TRIP/20180205_RSTP2_4803/data/processed/Mapping_RSTP2_2000_broad_indels.bed'
+
+
+
+genome: hg38
+
+celltype: 'K562'
+
+chip_dir:
+    '/DATA/usr/c.leemans/projects/chip_snake/'
+
+chip_config:
+    '/DATA/usr/c.leemans/projects/chip_snake/config.yaml'
+chip_snake:
+    '/DATA/usr/c.leemans/projects/chip_snake/chip_align.snakemake'
+
+use_encode_tracks: False
+encode_dir:  /DATA/usr/c.leemans/data/ChIP/bigwig/histone_and_remodelers/tracks

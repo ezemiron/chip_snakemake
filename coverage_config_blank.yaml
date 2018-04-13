@@ -1,0 +1,18 @@
+
+
+
+
+genome: hg38
+
+celltype: 'K562'
+
+chip_dir:
+    '/DATA/usr/c.leemans/projects/chip_snake/'
+
+chip_align_config:
+    '/DATA/usr/c.leemans/projects/chip_snake/config.yaml'
+chip_align:
+    '/DATA/usr/c.leemans/projects/chip_snake/chip_align.snakemake'
+
+use_encode_tracks: False
+encode_dir:  /DATA/usr/c.leemans/data/ChIP/bigwig/histone_and_remodelers/tracks

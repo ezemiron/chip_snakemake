@@ -6,23 +6,52 @@ bed_summary:
         '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/tssr_gene_body/gencode.v27_tss.bed'
     gencode.v27_body:
         '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/tssr_gene_body/gencode.v27_gene_body.bed'
+    gencode.v27_1kb:
+        '/DATA/usr/c.leemans/projects/single_cell_damid/raw_data/gencode.v27_tssr_1kb.bed'
 
 bed_window:
     gencode.v27:
         '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/selection/gencode.v27_fantom_selection.bed'
+    genehancer.v4.6:
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/selection/genehancer.v4.6_selection.bed'
+
+
+
 
 window_params:
     gencode.v27:
         a: 22000
         b: 22000
         binsize: 200
-        refpoint: TSS
+        refpoint: [TSS, TES]
+    genehancer.v4.6:
+        a: 11000
+        b: 11000
+        binsize: 200
+        refpoint: [center]
 
+genome: hg38
+
+celltype: 'K562'
 
 chip_dir:
     '/DATA/usr/c.leemans/projects/chip_snake/'
 
-chip_config:
+chip_align_config:
     '/DATA/usr/c.leemans/projects/chip_snake/config.yaml'
-chip_snake:
+chip_align:
     '/DATA/usr/c.leemans/projects/chip_snake/chip_align.snakemake'
+
+use_encode_tracks: False
+encode_dir:  /DATA/usr/c.leemans/data/ChIP/bigwig/histone_and_remodelers/tracks
+
+
+
+#
+#
+# multiBigwigSummary BED-file -p 5 \
+#         --BED /DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/tssr_gene_body/gencode.v27_tss.bed \
+#         -l HDAC1-human_ENCFF741BVS.bigWig HDAC2-human_ENCFF088GRY.bigWig \
+#         -b /DATA/usr/c.leemans/data/ChIP/bigwig/histone_and_remodelers/tracks/K562-ENCODE_ChIPseq_GRCh38_HDAC1-human_r1,2_ENCFF741BVS.bigWig /DATA/usr/c.leemans/data/ChIP/bigwig/histone_and_remodelers/tracks/K562-ENCODE_ChIPseq_GRCh38_HDAC2-human_r1,2_ENCFF088GRY.bigWig \
+#         -out /DATA/usr/c.leemans/projects/chip_snake/test_coverage/encode_means/gencode.v27_tssr.npz \
+#         --outRawCounts /DATA/usr/c.leemans/projects/chip_snake/test_coverage/encode_means/gencode.v27_tssr.txt
