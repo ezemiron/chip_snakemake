@@ -3,17 +3,47 @@ chip_out:
 
 experiment:
     K562:
-        Struhl2011:
-            NELFE:
-                ENCSR000DOF:
+        Salzberg2017:
+            H3K9me2:
+                ab1220:
                     treatment:
-                        [SRR502172, SRR502173]
+                        [SRR2148301, SRR3503783]
                     control:
-                        [SRR502109, SRR502110]
+                        [SRR2148307]
                     source: GEO
-                    SOFA: protein_binding_site
+                    SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: MNase
                     is_paired: False
+            H3K9me3:
+                ab8898:
+                    treatment:
+                        [SRR2148320]
+                    control:
+                        [SRR2148307]
+                    source: GEO
+                    SOFA: H3K9_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: MNase
+                    is_paired: False
+        Struhl2011:
+            # NELFE:
+            #     ENCSR000DOF:
+            #         treatment:
+            #             [SRR502172, SRR502173]
+            #         control:
+            #             [SRR502109, SRR502110]
+            #         source: GEO
+            #         SOFA: protein_binding_site
+            #         keep_duplicates: False
+            #         hiddendomain_width: 300
+            #         aligner: bowtie2
+            #         digestion: 'sonication'
+            #         is_paired: False
             CCNT2:
                 ENCSR000DOA:
                     treatment:
@@ -23,6 +53,23 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    hiddendomain_width: 300
+                    aligner: bowtie2
+                    digestion: 'sonication'
+                    is_paired: False
+        Farnham2011:
+            H3K9ac:
+                ENCSR000EVZ:
+                    treatment:
+                        [SRR341163, SRR341164]
+                    control:
+                        [SRR502606]
+                    source: GEO
+                    SOFA: H3K9_acetylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Snyder2016:
             POL2:
@@ -34,6 +81,9 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
                 ENCSR031TFS:
                     treatment:
@@ -43,6 +93,9 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Snyder2012:
             POL2AS2:
@@ -54,6 +107,9 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             MYC:
                 ENCSR000EGJ:
@@ -64,6 +120,9 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    hiddendomain_width: 300
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Liu2018:
             H3K9me2:
@@ -75,17 +134,23 @@ experiment:
                     source: GEO
                     SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H3K9me3:
-                ab1220:
-                    treatment:
-                        [SRR5287116, SRR5287117]
-                    control:
-                        [SRR5287120, SRR5287121]
-                    source: GEO
-                    SOFA: H3K9_trimethylation_site
-                    keep_duplicates: False
-                    is_paired: False
+                # ab1220:
+                #     treatment:
+                #         [SRR5287116, SRR5287117]
+                #     control:
+                #         [SRR5287120, SRR5287121]
+                #     source: GEO
+                #     SOFA: H3K9_trimethylation_site
+                #     keep_duplicates: False
+                #     hiddendomain_width: 1000
+                #     aligner: bowtie2
+                #     digestion: 'sonication'
+                #     is_paired: False
                 ab8898:
                     treatment:
                         [SRR5287100, SRR5287101]
@@ -94,6 +159,9 @@ experiment:
                     source: GEO
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Stamatoyannopoulos2011:
             H3K36me3:
@@ -105,9 +173,12 @@ experiment:
                     source: GEO
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Schmidl2015:
-            H3K27ME3:
+            H3K27me3:
                 chipmentation:
                     treatment:
                         [SRR2085903, SRR2085904]
@@ -116,6 +187,9 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: True
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
                 chipseq:
                     treatment:
@@ -125,8 +199,11 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
-            H3K27AC:
+            H3K27ac:
                 chipmentation:
                     treatment:
                         [SRR2085875, SRR2085876]
@@ -135,6 +212,9 @@ experiment:
                     source: GEO
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: True
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
                 chipseq:
                     treatment:
@@ -144,8 +224,11 @@ experiment:
                     source: GEO
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
-            H3K4ME1:
+            H3K4me1:
                 chipmentation:
                     treatment:
                         [SRR2085879, SRR2085880]
@@ -154,6 +237,9 @@ experiment:
                     source: GEO
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: True
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
                 chipseq:
                     treatment:
@@ -163,6 +249,49 @@ experiment:
                     source: GEO
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
+                    is_paired: False
+        Pradeepa2016:
+            H3K4me1:
+                ab8895:
+                    treatment:
+                        [SRR3144863]
+                    control:
+                        [SRR3144864]
+                    source: GEO
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K27ac:
+                ab4729:
+                    treatment:
+                        [SRR3144862]
+                    control:
+                        [SRR3144864]
+                    source: GEO
+                    SOFA: H3K27_acetylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K122ac:
+                ab33309:
+                    treatment:
+                        [SRR3144861]
+                    control:
+                        [SRR3144864]
+                    source: GEO
+                    SOFA: H3K122_acetylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Ratnakumar2012:
             macroH2A:
@@ -174,6 +303,9 @@ experiment:
                     source: GEO
                     SOFA: histone_modification
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Fu2013:
             H3K79me2:
@@ -185,6 +317,9 @@ experiment:
                     source: GEO
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Bernstein2012:
             EZH2:
@@ -196,6 +331,9 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H3K79me2:
                 ENCSR000APD:
@@ -206,6 +344,9 @@ experiment:
                     source: GEO
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H4K20me1:
                 ENCSR000AKX:
@@ -216,6 +357,9 @@ experiment:
                     source: GEO
                     SOFA: H3K20_monomethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H3K9me3:
                 ENCSR000APE:
@@ -226,6 +370,9 @@ experiment:
                     source: GEO
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Bernstein2011:
             H3K27me3:
@@ -237,6 +384,9 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H2AFZ:
                 ENCSR000APC:
@@ -247,6 +397,9 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H3K36me3:
                 ENCSR000AKR:
@@ -257,6 +410,9 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
     RPE:
         Jeroen:
@@ -269,6 +425,9 @@ experiment:
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
                     source: local
+                    hiddendomain_width: 500
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H3K27me3:
                 wz2106:
@@ -279,6 +438,9 @@ experiment:
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
                     source: local
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H3K9me3:
                 wz2107:
@@ -289,6 +451,9 @@ experiment:
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
                     source: local
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H3K4me1:
                 wz2108:
@@ -299,6 +464,9 @@ experiment:
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
                     source: local
+                    hiddendomain_width: 300
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
             H3K36me3:
                 wz2109:
@@ -309,6 +477,9 @@ experiment:
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
                     source: local
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
         Anna:
             H3K27me3:
@@ -320,14 +491,15 @@ experiment:
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
                     source: local
+                    hiddendomain_width: 1000
+                    aligner: bowtie2
+                    digestion: 'sonication'
                     is_paired: False
 
 forge:
     /DATA/usr/c.leemans/data/forge/
 
 
-domain_bins:
-    1000
 
 macs2_gsize: 'hs'
 
@@ -345,6 +517,12 @@ chrom_sizes:
     hg38: /DATA/data/human/hg38/genome/chromSizes_hg38_LP180129.txt
     hg19: /DATA/data/genomes/hg19/hg19.chrom.sizes
 
-bowtie_index:
-    hg38: '/DATA/data/human/hg38/index/bowtie2/hg38_1-22_XYM'
-    hg19: '/DATA/data/bowtie2/hg19_ch1-22_XYM'
+aligner_index:
+    bowtie2:
+        hg38: '/DATA/data/human/hg38/index/bowtie2/hg38_1-22_XYM'
+    # hg19: '/DATA/data/bowtie2/hg19_ch1-22_XYM'
+    bwa:
+        hg38: '/DATA/usr/c.leemans/data/hg38/hg38_1-22_XYM.fa'
+
+chip_genome:
+    - hg38

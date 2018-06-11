@@ -8,7 +8,8 @@ bed_summary:
         '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/tssr_gene_body/gencode.v27_gene_body.bed'
     gencode.v27_1kb:
         '/DATA/usr/c.leemans/projects/single_cell_damid/raw_data/gencode.v27_tssr_1kb.bed'
-
+    # genehancer.4.6_1kb:
+    #     '/DATA/usr/c.leemans/projects/single_cell_damid/raw_data/genehancer.v4.6_selection_1kb.bed'
 bed_window:
     gencode.v27:
         '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/selection/gencode.v27_fantom_selection.bed'

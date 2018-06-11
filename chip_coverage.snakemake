@@ -40,7 +40,7 @@ def iter_expirements(config, celltype='all'):
 def get_all(config):
     regex_means = '%s/means/%s_%s_%s_%s.txt'
     regex_peak = '%s/nearest_peak/%s_%s_%s_%s.txt'
-    regex_domain = '%s/nearest_domain/%s_%s_%s_%s.txt'
+    regex_domain = '%s/domain_call/%s_%s_%s_%s.txt'
     regex_window = '%s/window/%s_%s_%s_r%i_%s_%s.txt.gz'
     regex_emeans = '%s/encode_means/%s.txt'
     regex_ewindow = '%s/encode_window/%s_%s_%s_%s.txt.gz'
@@ -57,7 +57,7 @@ def get_all(config):
             for refpoint in window_params['refpoint']:
                 for exp_list in iter_expirements(config, celltype):
                     ct, experiment, target, sample, info = exp_list
-                    for r in range(0, len(sample_dict['treatment'])):
+                    for r in range(0, len(info['treatment'])):
                         yield(regex_window % (config['outdir'], bed,
                                               experiment, target, r + 1,
                                               sample, refpoint))
@@ -73,8 +73,8 @@ def get_all(config):
                 ct, experiment, target, sample, info = exp_list
                 yield(regex_peak % (config['outdir'], bed, experiment,
                                        target, sample))
-    if 'bed_nearest_domain' in config:
-        for bed in config['bed_nearest_domain']:
+    if 'bed_nearest_domains' in config:
+        for bed in config['bed_nearest_domains']:
             for exp_list in iter_expirements(config, celltype):
                 ct, experiment, target, sample, info = exp_list
                 yield(regex_domain % (config['outdir'], bed, experiment,
@@ -103,7 +103,6 @@ rule all_chip:
         lambda wildcards: get_all(config)
 
 
-
 def get_encode_label(config):
     file_list = get_encode_input(config)
     return(['_'.join((bw.split('_')[3],bw.split('_')[5])) for bw in file_list])
@@ -120,6 +119,15 @@ def get_peaks(config, wildcards):
                                                wildcards.sample))
 
 
+rule overlap_with_peak:
+    input:
+        bed=lambda wildcards: config['bed_summary'][wildcards.bed],
+        peaks=lambda wildcards: get_peaks(config, wildcards)
+    output:
+        "{outdir}/{peaktype}_call/{bed}_{experiment}_{target}_{sample}.txt"
+    shell:
+        "bedtools intersect -c -a {input.bed} -b {input.peaks} "
+        "    > {output}"
 
 rule nearestPeak:
     input:
@@ -254,7 +262,7 @@ rule means:
         bed=lambda wildcards: config['bed_summary'][wildcards.bed],
         exp=lambda wildcards: get_exp(config, wildcards),
         ip=lambda wildcards: get_ctrl_input(config, wildcards),
-        counts='{outdir}/counts/{bed}_{experiment}_{target}_{sample}.txt'
+        counts='{outdir}/chip_counts/{bed}_{experiment}_{target}_{sample}.txt'
     output:
         '{outdir}/means/{bed}_{experiment}_{target}_{sample}.txt'
     run:
@@ -277,8 +285,8 @@ rule multiBamSummary:
     params:
         exp_label=lambda wildcards: list(get_exp_label(config, wildcards))
     output:
-        '{outdir}/counts/{bed}_{experiment}_{target}_{sample}.npz',
-        '{outdir}/counts/{bed}_{experiment}_{target}_{sample}.txt'
+        '{outdir}/chip_counts/{bed}_{experiment}_{target}_{sample}.npz',
+        '{outdir}/chip_counts/{bed}_{experiment}_{target}_{sample}.txt'
     threads:
         5
     shell:

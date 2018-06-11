@@ -43,9 +43,8 @@ norm_list = lapply(names(exp_stats), function(s){
     m_ip = sum(input_stats[, 'n_mapped'])
     m_s = sum(exp_stats[[s]][, 'n_mapped'])
     m_min = min(m_ip, m_s)
-
     ct = count_table[,c('Input', s)]
-    norm_c = ct / c(m_ip, m_s) * m_min + 1
+    norm_c = t(t(ct) / c(m_ip, m_s) * m_min + 1)
     norm_c[,s] / norm_c[, 'Input']
 })
 
