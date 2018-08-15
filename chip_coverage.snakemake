@@ -39,12 +39,20 @@ def iter_expirements(config, celltype='all'):
 
 def get_all(config):
     regex_means = '%s/means/%s_%s_%s_%s.txt'
+    regex_dmeans = '%s/domain_means/%s_%s_%s_%s.txt'
     regex_peak = '%s/nearest_peak/%s_%s_%s_%s.txt'
     regex_domain = '%s/domain_call/%s_%s_%s_%s.txt'
-    regex_window = '%s/window/%s_%s_%s_r%i_%s_%s.txt.gz'
+    regex_window = '%s/window/%s_%s_%s_%s_%s_%s_%i_%i_%i.txt.gz'
     regex_emeans = '%s/encode_means/%s.txt'
     regex_ewindow = '%s/encode_window/%s_%s_%s_%s.txt.gz'
     celltype = config['celltype']
+    if 'domain_means' in config:
+        for domain in config['domain_means']:
+            for exp_list in iter_expirements(config, celltype):
+                ct, experiment, target, sample, info = exp_list
+                yield(regex_dmeans % (config['outdir'], domain, experiment,
+                                      target, sample))
+
     if 'bed_summary' in config:
         for bed in config['bed_summary']:
             for exp_list in iter_expirements(config, celltype):
@@ -58,9 +66,19 @@ def get_all(config):
                 for exp_list in iter_expirements(config, celltype):
                     ct, experiment, target, sample, info = exp_list
                     for r in range(0, len(info['treatment'])):
+                        r_str = 'r%i' % (r + 1)
                         yield(regex_window % (config['outdir'], bed,
-                                              experiment, target, r + 1,
-                                              sample, refpoint))
+                                              experiment, target, r_str,
+                                              sample, refpoint,
+                                              window_params['a'],
+                                              window_params['b'],
+                                              window_params['binsize']))
+                    yield(regex_window % (config['outdir'], bed,
+                                          experiment, target, "control",
+                                          sample, refpoint,
+                                          window_params['a'],
+                                          window_params['b'],
+                                          window_params['binsize']))
     if 'bed_nearest_peak' in config:
         for bed in config['bed_nearest']:
             for exp_list in iter_expirements(config, celltype):
@@ -192,17 +210,25 @@ rule compute_encode_matrix:
 
 
 def get_bw(config, wildcards):
-    exp_dict = config['experiment'][config['celltype']][wildcards.experiment]
-    r = int(wildcards.rep.replace('r', '')) - 1
-    rep_list = exp_dict[wildcards.target][wildcards.sample]['treatment']
-    yield('%s/%s/tracks/%s/%s/%s_%s_%s_%s_fcoc.bw' % (config['chip_out'],
-                                                      config['genome'],
-                                                      config['celltype'],
-                                                      wildcards.experiment,
-                                                      wildcards.target,
-                                                      wildcards.sample,
-                                                      wildcards.rep,
-                                                      rep_list[r]))
+    if wildcards.rep=='control':
+        exp_dict = config['experiment'][config['celltype']][wildcards.experiment]
+        control_list = exp_dict[wildcards.target][wildcards.sample]['control']
+        control_str = '_'.join(control_list)
+        yield('%s/%s/coverage/control/%s.bw' % (config['chip_out'],
+                                                config['genome'],
+                                                control_str))
+    else:
+        exp_dict = config['experiment'][config['celltype']][wildcards.experiment]
+        r = int(wildcards.rep.replace('r', '')) - 1
+        rep_list = exp_dict[wildcards.target][wildcards.sample]['treatment']
+        yield('%s/%s/coverage/%s/%s/%s_%s_%s_%s.bw' % (config['chip_out'],
+                                                       config['genome'],
+                                                       config['celltype'],
+                                                       wildcards.experiment,
+                                                       wildcards.target,
+                                                       wildcards.sample,
+                                                       wildcards.rep,
+                                                       rep_list[r]))
 
 
 
@@ -212,12 +238,13 @@ rule compute_matrix:
         bw=lambda wildcards: list(get_bw(config, wildcards)),
         bed=lambda wildcards: config['bed_window'][wildcards.bed]
     params:
-        a=lambda wildcards: config['window_params'][wildcards.bed]['a'],
-        b=lambda wildcards: config['window_params'][wildcards.bed]['b'],
+        a='{a}',
+        b='{b}',
         refpoint='{refpoint}',
-        bs=lambda wildcards: config['window_params'][wildcards.bed]['binsize']
+        bs='{bs}'
     output:
-        '{outdir}/window/{bed}_{experiment}_{target}_{rep}_{sample}_{refpoint}.txt.gz'
+        ('{outdir}/window/{bed}_{experiment}_{target}_{rep}_{sample}_'
+         '{refpoint}_{a}_{b}_{bs}.txt.gz')
     threads:
         5
     shell:
@@ -255,6 +282,25 @@ def get_ctrl_input(config, wildcards):
     srr_str = '_'.join(srr_list)
     return('%s/%s/filtered/control/%s.bam' % (config['chip_out'], config['genome'],
                                               srr_str))
+
+
+rule domain_means:
+    input:
+        bed=lambda wildcards: config['domain_means'][wildcards.bed],
+        exp=lambda wildcards: get_exp(config, wildcards),
+        ip=lambda wildcards: get_ctrl_input(config, wildcards),
+    params:
+        exp_label=lambda wildcards: list(get_exp_label(config, wildcards))
+    threads:
+        10
+    output:
+        '{outdir}/domain_means/{bed}_{experiment}_{target}_{sample}.txt'
+    shell:
+        "{chip_path}/scripts/compute_domain.sh -d {input.bed}"
+        "                                      -b \"{input.ip} {input.exp}\""
+        "                                      -l \"{params.exp_label}\""
+        "                                      -t {threads}"
+        "                                      -o {output}"
 
 
 rule means:

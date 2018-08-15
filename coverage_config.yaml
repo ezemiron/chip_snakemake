@@ -3,19 +3,22 @@ outdir:
 
 bed_summary:
     gencode.v27_tssr:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/tssr_gene_body/gencode.v27_tss.bed'
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_tss.bed'
     gencode.v27_body:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/tssr_gene_body/gencode.v27_gene_body.bed'
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_gene_body.bed'
     gencode.v27_1kb:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/raw_data/gencode.v27_tssr_1kb.bed'
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_1kb.bed'
     # genehancer.4.6_1kb:
     #     '/DATA/usr/c.leemans/projects/single_cell_damid/raw_data/genehancer.v4.6_selection_1kb.bed'
 bed_window:
     gencode.v27:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/selection/gencode.v27_fantom_selection.bed'
-    genehancer.v4.6:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180112_hg38_snakemake/selection/genehancer.v4.6_selection.bed'
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/selection/gencode.v27_fantom_selection.bed'
+    # genehancer.v4.6:
+    #     '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/selection/genehancer.v4.6_selection.bed'
 
+
+domain_means:
+    LMNB1.5kb: /DATA/usr/t.v.schaik/proj/3D_nucleus/results/ts180110_4DN_DataProcessing/results/HMM/bin-5kb/K562_LMNB1-5kb-combined_HMM.txt.gz
 
 
 
@@ -23,7 +26,7 @@ window_params:
     gencode.v27:
         a: 22000
         b: 22000
-        binsize: 200
+        binsize: 100
         refpoint: [TSS, TES]
     genehancer.v4.6:
         a: 11000

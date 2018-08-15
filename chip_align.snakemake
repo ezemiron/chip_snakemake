@@ -10,6 +10,7 @@ configfile: "%s/config.yaml" % (chip_path)
 
 def get_all(config):
     regex_bw = '%s/%s/tracks/%s/%s/%s_%s_r%i_%s_fcoc.bw'
+    regex_idx = '%s/%s/idxstats/%s/%s/%s_%s.txt'
     regex_corr = '%s/%s/stats/%s/%s/%s_%s_scatter.pdf'
     regex_gff = '%s/%s/gff3/%s/%s/%s_%s_r%i_%s_%s.gff3'
     for genome in config['chip_genome']:
@@ -20,21 +21,21 @@ def get_all(config):
                     target_dict = exp_dict[target]
                     for sample in target_dict:
                         rep_list = target_dict[sample]['treatment']
-                        if len(rep_list) > 1:
-                            yield(regex_corr % (config['chip_out'], genome,
-                                                celltype, experiment, target,
-                                                sample))
+                        # if len(rep_list) > 1:
+                        #     yield(regex_corr % (config['chip_out'], genome,
+                        #                         celltype, experiment, target,
+                        #                         sample))
                         for rep in range(0, len(rep_list)):
                             yield(regex_bw % (config['chip_out'], genome,
                                               celltype, experiment, target,
                                               sample, rep+1, rep_list[rep]))
-                            for region in ('domains', 'narrowPeak'):
-                                yield(regex_gff % (config['chip_out'], genome,
-                                                   celltype, experiment, target,
-                                                   sample, rep+1,
-                                                   rep_list[rep], region))
-                    # yield('stats/%s/%s_%s_scatter.pdf' % (experiment, target,
-                    #                                       sample))
+                            # for region in ('domains', 'narrowPeak'):
+                            #     yield(regex_gff % (config['chip_out'], genome,
+                            #                        celltype, experiment, target,
+                            #                        sample, rep+1,
+                            #                        rep_list[rep], region))
+                        yield(regex_idx % (config['chip_out'], genome, celltype,
+                                           experiment, target, sample))
 
 
 rule all_chip_align:
@@ -85,6 +86,42 @@ rule compare_replicates:
         "                     -bs 1000 "
         "                     -p {threads} "
         "                     -out {output} "
+
+
+def get_exp(config, wildcards):
+    exp_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
+    rep_list = exp_dict[wildcards.target][wildcards.sample]['treatment']
+    for r in range(0,len(rep_list)):
+        yield('%s/%s/filtered/%s/%s/%s_%s_r%i_%s.bam' % (wildcards.outdir,
+                                                         wildcards.genome,
+                                                         wildcards.celltype,
+                                                         wildcards.experiment,
+                                                         wildcards.target,
+                                                         wildcards.sample,
+                                                         r + 1, rep_list[r]))
+def get_ctrl_input(config, wildcards):
+    ip_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
+    srr_list = ip_dict[wildcards.target][wildcards.sample]['control']
+    srr_str = '_'.join(srr_list)
+    return('%s/%s/filtered/control/%s.bam' % (wildcards.outdir, wildcards.genome,
+                                              srr_str))
+
+
+rule idxstats:
+    input:
+        exp=lambda wildcards: get_exp(config, wildcards),
+        ip=lambda wildcards: get_ctrl_input(config, wildcards),
+    output:
+        '{outdir}/{genome}/idxstats/{celltype}/{experiment}/{target}_{sample}.txt'
+    shell:
+        "{chip_path}/scripts/idxstats.R --exp {input.exp} "
+        "                               --input {input.ip}"
+        "                               --out {output}"
+
+
+
+
+
 
 # ruleorder: bamcompare > coverage
 #
@@ -250,6 +287,21 @@ def get_greylist(config, wildcards):
     srr_id = '_'.join(exp_dict[wildcards.target][wildcards.sample]['control'])
     return('%s/%s/greylist/%s-grey.bed' % (wildcards.outdir,
                                            wildcards.genome, srr_id))
+
+rule bw_coverage:
+    input:
+        bam='{outdir}/{genome}/filtered/{name}.bam',
+        bai='{outdir}/{genome}/filtered/{name}.bam.bai'
+    output:
+        '{outdir}/{genome}/coverage/{name}.bw'
+    threads:
+        10
+    shell:
+        "bamCoverage -p {threads}"
+        "            -b {input.bam}"
+        "            -o {output}"
+        "            -bs 1"
+
 
 rule filter_blackgrey_ctrl:
     input:

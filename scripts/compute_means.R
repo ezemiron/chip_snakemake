@@ -28,6 +28,7 @@ idxstats <- function(bam_file){
 
 exp_stats = lapply(exp_vec, idxstats)
 names(exp_stats) = gsub('.*/(.*)/(.*)[.]bam', '\\1_\\2', exp_vec)
+names(exp_stats) = gsub('-', '.', names(exp_stats))
 input_stats = idxstats(argv$input)
 
 count_table = read.table(argv$counts, header=T, comment.char='',
