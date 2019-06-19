@@ -1,28 +1,28 @@
 outdir:
-    '/DATA/usr/c.leemans/projects/chip_snake/test_coverage'
+    '/DATA/usr/c.leemans/projects/chip_snake/cl20181108_lad_repression'
 
 bed_summary:
     gencode.v27_tssr:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_tss.bed'
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20181108_hg38_snakemake/tssr_gene_body/gencode.v27_tssr.bed'
     gencode.v27_body:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_gene_body.bed'
-    gencode.v27_1kb:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_1kb.bed'
-    gencode.v27_5kb:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_5kb.bed'
-    genehancer.4.6_5kb:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/genehancer.v4.6_5kb.bed'
-bed_window:
-    gencode.v27:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/selection/gencode.v27_fantom_selection.bed'
+        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20181108_hg38_snakemake/tssr_gene_body/gencode.v27_gene_body.bed'
+    # gencode.v27_1kb:
+    #     '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_1kb.bed'
+    # gencode.v27_5kb:
+    #     '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_5kb.bed'
+    # genehancer.4.6_5kb:
+    #     '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/genehancer.v4.6_5kb.bed'
+# bed_window:
+#     gencode.v27:
+#         '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/selection/gencode.v27_fantom_selection.bed'
     # genehancer.v4.6:
     #     '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/selection/genehancer.v4.6_selection.bed'
 
-bed_nearest_domains:
-    gencode.v27:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_tss.bed'
-    genehancer.v4.6:
-        '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/genehancer.v4.6_center.bed'
+# bed_nearest_domains:
+#     gencode.v27:
+#         '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/gencode.v27_tss.bed'
+#     genehancer.v4.6:
+#         '/DATA/usr/c.leemans/projects/single_cell_damid/cl20180517_hg38_snakemake/tssr_gene_body/genehancer.v4.6_center.bed'
 
 window_params:
     gencode.v27:

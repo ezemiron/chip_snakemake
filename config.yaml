@@ -13,8 +13,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: sonication
                     is_paired: False
     K562:
@@ -28,10 +30,191 @@ experiment:
         #             source: GEO
         #             SOFA: protein_binding_site
         #             keep_duplicates: False
-        #             hiddendomain_width: 1000
+        #             hiddendomain_width: [1000]
         #             aligner: bowtie2
+        #             track_bs: [1000]
         #             digestion: sonication
         #             is_paired: False
+        Shah2018:
+            H3K4me1:
+                GSM2773392:
+                    treatment:
+                        [SRR6010166]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Abcam ab8895, Lot GR305231-1, anti-H3K4me1"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~5% off-target for H3K4me2/me3"
+                GSM2773394:
+                    treatment:
+                        [SRR6010168]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Cell Signaling Technologies 5326 BF, Lot 2, anti-H3K4me1"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~0% off-target for H3K4me2/me3"
+                GSM2773396:
+                    treatment:
+                        [SRR6010170]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Thermo Fisher 710795, Lot QL230605, anti-H3K4me1"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~0% off-target for H3K4me2/me3"
+            H3K4me2:
+                GSM2773400:
+                    treatment:
+                        [SRR6010174]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_dimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Thermo Fisher 710796, Lot QL230606, anti-H3K4me2"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~0% off-target for H3K4me1/me3"
+                GSM2773399:
+                    treatment:
+                        [SRR6010173]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_dimethylation_site
+                    track_bs: [1000]
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    antibody: "EMD Millipore 05-1338, Lot 2757107, anti-H3K4me2"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~30% off-target for H3K4me1"
+            H3K4me3:
+                GSM2773401:
+                    treatment:
+                        [SRR6010175]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Abcam ab12209, Lot GR275790-1, anti-H3K4me3"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~10% off-target for H3K4me2"
+                GSM2773403:
+                    treatment:
+                        [SRR6010177]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Abclonal A2357, Vial 46698, anti-H3K4me3"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~10% off-target for H3K4me2"
+                GSM2773404:
+                    treatment:
+                        [SRR6010178]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "EMD Millipore 05-745R, Lot 2813867, anti-H3K4me3"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~10% off-target for H3K4me2"
+                GSM2773406:
+                    treatment:
+                        [SRR6010180]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Thermo Fisher PA5-40086, Lot SC2349865, anti-H3K4me3"
+                    digestion: sonication
+                    is_paired: True
+                    comment: "~0% off-target for H3K4me1/me2"
+            H3K9me3:
+                GSM3228107:
+                    treatment:
+                        [SRR7441421]
+                    control:
+                        [SRR7441422]
+                    source: GEO
+                    SOFA: H3K9_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
+                    antibody: "Koide Lab 309M3B recombinant anti-H3K9me3.3"
+                    digestion: sonication
+                    is_paired: True
+        Tyler2017:
+            BRD4:
+                GSE88747:
+                    treatment:
+                        [SRR4423323, SRR4423324]
+                    control:
+                        [SRR4423325, SRR4423326]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: MNase
+                    is_paired: False
         vdBoom2016:
             H2AK119ub:
                 GSM1319308:
@@ -42,8 +225,10 @@ experiment:
                     source: GEO
                     SOFA: H2AK119_ubiquitylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: unknown
                     is_paired: False
             H3K27me3:
@@ -55,8 +240,10 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000, 20000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: unknown
                     is_paired: False
             CBX2-GFP:
@@ -68,8 +255,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: unknown
                     is_paired: False
             PCGF1-GFP:
@@ -81,8 +270,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: unknown
                     is_paired: False
             BMI1-GFP:
@@ -94,8 +285,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: unknown
                     is_paired: False
             RINGB1:
@@ -107,8 +300,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: unknown
                     is_paired: False
             RINGA1:
@@ -120,8 +315,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: unknown
                     is_paired: False
             MEL18-GFP:
@@ -133,8 +330,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: unknown
                     is_paired: False
         Salzberg2017:
@@ -147,8 +346,10 @@ experiment:
                     source: GEO
                     SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: MNase
                     is_paired: False
             H3K9me3:
@@ -160,24 +361,28 @@ experiment:
                     source: GEO
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: MNase
                     is_paired: False
-        # Struhl2011:
-            # NELFE:
-            #     ENCSR000DOF:
-            #         treatment:
-            #             [SRR502172, SRR502173]
-            #         control:
-            #             [SRR502109, SRR502110]
-            #         source: GEO
-            #         SOFA: protein_binding_site
-            #         keep_duplicates: False
-            #         hiddendomain_width: 300
-            #         aligner: bowtie2
-            #         digestion: 'sonication'
-            #         is_paired: False
+        Struhl2011:
+            NELFE:
+                ENCSR000DOF:
+                    treatment:
+                        [SRR502172, SRR502173]
+                    control:
+                        [SRR502109, SRR502110]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
             # CCNT2:
             #     ENCSR000DOA:
             #         treatment:
@@ -187,8 +392,9 @@ experiment:
             #         source: GEO
             #         SOFA: protein_binding_site
             #         keep_duplicates: False
-            #         hiddendomain_width: 300
+            #         hiddendomain_width: [300]
             #         aligner: bowtie2
+            #         track_bs: [1000]
             #         digestion: 'sonication'
             #         is_paired: False
         # Farnham2011:
@@ -201,8 +407,9 @@ experiment:
         #             source: GEO
         #             SOFA: H3K9_acetylation_site
         #             keep_duplicates: False
-        #             hiddendomain_width: 1000
+        #             hiddendomain_width: [1000]
         #             aligner: bowtie2
+        #             track_bs: [1000]
         #             digestion: 'sonication'
         #             is_paired: False
         Snyder2016:
@@ -215,8 +422,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: True
                     comment: "Don't know which exact antibody was used, only
@@ -229,12 +438,113 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: True
                     comment: "Don't know which exact antibody was used, only
                               know that the antibody used was against POL2A"
+            MLLT1:
+                ENCSR675LRO:
+                  treatment:
+                      [SRR5111945, SRR5111946]
+                  control:
+                      [SRR5111209, SRR5111210]
+                  source: GEO
+                  SOFA: protein_binding_site
+                  keep_duplicates: False
+                  hiddendomain_width: [1000]
+                  hiddendomain_p: 0.9
+                  aligner: bowtie2
+                  track_bs: [1000]
+                  digestion: 'sonication'
+                  is_paired: True
+            LARP7:
+                ENCSR288MOZ:
+                  treatment:
+                      [SRR5111377, SRR5111378]
+                  control:
+                      [SRR5111209, SRR5111210]
+                  source: GEO
+                  SOFA: protein_binding_site
+                  keep_duplicates: False
+                  hiddendomain_width: [1000]
+                  hiddendomain_p: 0.9
+                  aligner: bowtie2
+                  track_bs: [1000]
+                  digestion: 'sonication'
+                  is_paired: True
+        Snyder2017:
+            GTF2F1:
+                ENCSR189VXS:
+                    treatment:
+                        [ENCFF784TRG, ENCFF909TZW]
+                    control:
+                        [ENCFF410PHD, ENCFF240DTE]
+                    treatment2:
+                        [ENCFF055CQR, ENCFF999MLQ]
+                    control2:
+                        [ENCFF368UOC, ENCFF608MDV]
+                    source: ENCODE
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: True
+                    comment: "Secondary characterization with IP-MS failed with no
+                              antibody left for another attempt. but ENCODE IDR
+                              quality standards passed."
+            HDAC1:
+                ENCSR711VWL:
+                  treatment:
+                      [SRR6213961, SRR6213962]
+                  control:
+                      [SRR5111209, SRR5111210]
+                  source: GEO
+                  SOFA: protein_binding_site
+                  keep_duplicates: False
+                  hiddendomain_width: [1000]
+                  hiddendomain_p: 0.9
+                  aligner: bowtie2
+                  track_bs: [1000]
+                  digestion: 'sonication'
+                  is_paired: True
+            HDAC2:
+                ENCSR075HTM:
+                  treatment:
+                      [SRR5111049, SRR5111050]
+                  control:
+                      [SRR5111209, SRR5111210]
+                  source: GEO
+                  SOFA: protein_binding_site
+                  keep_duplicates: False
+                  hiddendomain_width: [1000]
+                  hiddendomain_p: 0.9
+                  aligner: bowtie2
+                  track_bs: [1000]
+                  digestion: 'sonication'
+                  is_paired: True
+        Snyder2018:
+            HDAC3:
+                ENCSR024LKA:
+                  treatment:
+                      [SRR8659957, SRR8659958]
+                  control:
+                      [SRR5111896, SRR5111897]
+                  source: GEO
+                  SOFA: protein_binding_site
+                  keep_duplicates: False
+                  hiddendomain_width: [1000]
+                  hiddendomain_p: 0.9
+                  aligner: bowtie2
+                  track_bs: [1000]
+                  digestion: 'sonication'
+                  is_paired: True
         Snyder2012:
             POL2AS2:
                 ENCSR000EGF:
@@ -245,8 +555,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
             MYC:
@@ -258,8 +570,146 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 300
+                    hiddendomain_width: [300, 1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            SMC3:
+                ENCSR000EGW:
+                    treatment:
+                        [SRR502001, SRR502002]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            RCOR1:
+                ENCSR000EGC:
+                    treatment:
+                        [SRR502152, SRR502153, SRR502154]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            Znf143:
+                ENCSR000EGP:
+                    treatment:
+                        [SRR502540, SRR502541]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            ELK1:
+                ENCSR000EFU:
+                    treatment:
+                        [SRR568158, SRR568159]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            MAX:
+                ENCSR000EFV:
+                    treatment:
+                        [SRR502073, SRR502074]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            MAZ:
+                ENCSR000EFX:
+                    treatment:
+                        [SRR502060, SRR502059]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            ARID3A:
+                ENCSR000EFY:
+                    treatment:
+                        [SRR502058, SRR502057]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            GTF2F1:
+                ENCSR000EHC:
+                    treatment:
+                        [SRR502390, SRR502391]
+                    control:
+                        [SRR502641]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+        Myers2011:
+            SP1:
+                ENCSR000BKO:
+                    treatment:
+                        [SRR351827, SRR351828]
+                    control:
+                        [SRR351761, SRR351762]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
         Liu2018:
@@ -272,8 +722,10 @@ experiment:
                     source: GEO
                     SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "GEO annotation was ambiguous for 1 other experiment
@@ -289,8 +741,9 @@ experiment:
                 #     source: GEO
                 #     SOFA: H3K9_trimethylation_site
                 #     keep_duplicates: False
-                #     hiddendomain_width: 1000
+                #     hiddendomain_width: [1000]
                 #     aligner: bowtie2
+                #     track_bs: [1000]
                 #     digestion: 'sonication'
                 #     is_paired: False
                 ab8898:
@@ -301,8 +754,10 @@ experiment:
                     source: GEO
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "GEO annotation was ambiguous for 1 other experiment
@@ -319,8 +774,10 @@ experiment:
                     source: GEO
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: 'read depth is low'
@@ -334,10 +791,13 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: True
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000, 5000, 20000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
+                    antibody: "Millipore 07-449"
                 chipseq:
                     treatment:
                         [SRR2085893, SRR2085894]
@@ -346,10 +806,13 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000, 5000, 20000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
+                    antibody: "Millipore 07-449"
             H3K27ac:
                 chipmentation:
                     treatment:
@@ -359,10 +822,13 @@ experiment:
                     source: GEO
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: True
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
+                    antibody: "Diagenode pAb-196-050"
                 chipseq:
                     treatment:
                         [SRR2085858]
@@ -371,10 +837,13 @@ experiment:
                     source: GEO
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
+                    antibody: "Diagenode pAb-196-050"
             H3K4me1:
                 chipmentation:
                     treatment:
@@ -384,10 +853,14 @@ experiment:
                     source: GEO
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: True
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
+                    antibody: "Diagenode pAb-194-050"
+                    comment: "similar ab had 0% off-target for H3K4me2/me3 in Shah et al."
                 chipseq:
                     treatment:
                         [SRR2085860, SRR2085861]
@@ -396,10 +869,14 @@ experiment:
                     source: GEO
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
+                    antibody: "Diagenode pAb-194-050"
+                    comment: "similar ab had 0% off-target for H3K4me2/me3 in Shah et al."
             H3K36me3:
                 chipmentation:
                     treatment:
@@ -407,49 +884,126 @@ experiment:
                     control:
                         [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
                     source: GEO
-                    SOFA: H3K4_monomethylation_site
+                    SOFA: H3K36_trimethylation_site
                     keep_duplicates: True
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
+                    antibody: 'Diagenode pAb-192-050'
                 chipseq:
                     treatment:
                         [SRR2085859]
                     control:
                         [SRR2085862, SRR2085863, SRR2085864]
                     source: GEO
-                    SOFA: H3K4_monomethylation_site
+                    SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
-            # PU1:
-            #     chipmentation:
-            #         treatment:
-            #             [SRR2085887, SRR2085888]
-            #         control:
-            #             [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
-            #         source: GEO
-            #         SOFA: H3K4_monomethylation_site
-            #         keep_duplicates: True
-            #         hiddendomain_width: 1000
-            #         aligner: bowtie2
-            #         digestion: 'sonication'
-            #         is_paired: False
-            #     chipseq:
-            #         treatment:
-            #             [SRR2085865, SRR2085866]
-            #         control:
-            #             [SRR2085862, SRR2085863, SRR2085864]
-            #         source: GEO
-            #         SOFA: H3K4_monomethylation_site
-            #         keep_duplicates: False
-            #         hiddendomain_width: 1000
-            #         aligner: bowtie2
-            #         digestion: 'sonication'
-            #         is_paired: False
+                    antibody: 'Diagenode pAb-192-050'
+            PU1:
+                chipmentation:
+                    treatment:
+                        [SRR2085887, SRR2085888]
+                    control:
+                        [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: True
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    antibody: "Santa Cruz sc-352"
+                chipseq:
+                    treatment:
+                        [SRR2085865, SRR2085866]
+                    control:
+                        [SRR2085862, SRR2085863, SRR2085864]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    antibody: "Santa Cruz sc-352"
+            H3K4me3:
+                chipmentation:
+                    treatment:
+                        [SRR2085909, SRR2085910]
+                    control:
+                        [SRR2085912, SRR2085913, SRR2085914]
+                    source: GEO
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: True
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    antibody: "Diagenode C15410003-50"
+                    comment: "similar ab had 20% off-target for H3K4me2 in Shah et al."
+                chipseq:
+                    treatment:
+                        [SRR2085895, SRR2085896]
+                    control:
+                        [SRR2085897, SRR2085898]
+                    source: GEO
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: True
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    antibody: "Diagenode C15410003-50"
+                    comment: "similar ab had 20% off-target for H3K4me2 in Shah et al."
+            CTCF:
+                chipmentation:
+                    treatment:
+                        [SRR2085871, SRR2085872]
+                    control:
+                        [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: True
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    antibody: "Millipore 07-729"
+                chipseq:
+                    treatment:
+                        [SRR2085854, SRR2085855]
+                    control:
+                        [SRR2085862, SRR2085863, SRR2085864]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: True
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    antibody: "Millipore 07-729"
+
         Pradeepa2016:
             H3K4me1:
                 ab8895:
@@ -460,11 +1014,13 @@ experiment:
                     source: GEO
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
-                    digestion: 'sonication'
+                    track_bs: [1000]
+                    digestion: 'Mnase'
                     is_paired: False
-                    comment: "just a single replicate, but looks really good."
+                    comment: "just a single replicate, but looks really good. Ab no off-target according to Shah et al."
             H3K27ac:
                 ab4729:
                     treatment:
@@ -474,9 +1030,11 @@ experiment:
                     source: GEO
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
-                    digestion: 'sonication'
+                    track_bs: [1000]
+                    digestion: 'Mnase'
                     is_paired: False
                     comment: "just a single replicate, but looks really good."
             H3K122ac:
@@ -488,9 +1046,11 @@ experiment:
                     source: GEO
                     SOFA: H3K122_acetylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
-                    digestion: 'sonication'
+                    track_bs: [1000]
+                    digestion: 'Mnase'
                     is_paired: False
                     comment: "just a single replicate, but looks really good."
         Ratnakumar2012:
@@ -503,9 +1063,11 @@ experiment:
                     source: GEO
                     SOFA: histone_modification
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
-                    digestion: 'sonication'
+                    track_bs: [1000]
+                    digestion: 'Mnase'
                     is_paired: False
                     comment: "treated with luciferase shRNA (used for control)"
         Fu2013:
@@ -518,11 +1080,29 @@ experiment:
                     source: GEO
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "read depth is very low"
+        Snyder2011:
+            TBP:
+                ENCSR000EHA:
+                    treatment:
+                        [SRR502378, SRR502379]
+                    control:
+                        [SRR502667, SRR502668]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
         Bernstein2012:
             EZH2:
                 ENCSR000AQE:
@@ -533,8 +1113,10 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: '1 replicate has really low read depth'
@@ -543,12 +1125,14 @@ experiment:
                     treatment:
                         [SRR227378, SRR227379]
                     control:
-                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213] ## ENCODE might have used only SRR5331213
                     source: GEO
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: '1 replicate has really low read depth'
@@ -561,8 +1145,9 @@ experiment:
             #         source: GEO
             #         SOFA: H3K20_monomethylation_site
             #         keep_duplicates: False
-            #         hiddendomain_width: 1000
+            #         hiddendomain_width: [1000]
             #         aligner: bowtie2
+            #         track_bs: [1000]
             #         digestion: 'sonication'
             #         is_paired: False
             H3K9me3:
@@ -574,8 +1159,10 @@ experiment:
                     source: GEO
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "1 replicate has really low read depth"
@@ -589,8 +1176,9 @@ experiment:
             #         source: GEO
             #         SOFA: H3K27_trimethylation_site
             #         keep_duplicates: False
-            #         hiddendomain_width: 1000
+            #         hiddendomain_width: [1000]
             #         aligner: bowtie2
+            #         track_bs: [1000]
             #         digestion: 'sonication'
             #         is_paired: False
             H2AFZ:
@@ -602,8 +1190,10 @@ experiment:
                     source: GEO
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "other chip-seq data in this series has mixed
@@ -622,8 +1212,9 @@ experiment:
             #         source: GEO
             #         SOFA: H3K36_trimethylation_site
             #         keep_duplicates: False
-            #         hiddendomain_width: 1000
+            #         hiddendomain_width: [1000]
             #         aligner: bowtie2
+            # track_bs: [1000]
             #         digestion: 'sonication'
             #         is_paired: False
         Minoda2018:
@@ -636,11 +1227,30 @@ experiment:
                     source: GEO
                     SOFA: H4K5_acetylation_K8_acetylation_site
                     keep_duplicates: False
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000]
                     digestion: 'sonication'
                     is_paired: False
-    RPE:
+    HRPEpiC:
+        Alessio2014:
+            CTCF:
+                GSM1463918:
+                    treatment:
+                        [SRR1534808]
+                    control:
+                        [SRR1534805, SRR1534807, SRR1534812]
+                    source: GEO
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+    hTERT-RPE1:
         Jeroen:
             H3K4me3:
                 wz2105:
@@ -651,8 +1261,10 @@ experiment:
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
                     source: local
-                    hiddendomain_width: 500
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
             H3K27me3:
@@ -664,8 +1276,10 @@ experiment:
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
                     source: local
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
             H3K9me3:
@@ -677,8 +1291,10 @@ experiment:
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
                     source: local
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
             H3K4me1:
@@ -690,8 +1306,10 @@ experiment:
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
                     source: local
-                    hiddendomain_width: 300
+                    hiddendomain_width: [300]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
             H3K36me3:
@@ -703,8 +1321,10 @@ experiment:
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
                     source: local
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
         Anna:
@@ -717,8 +1337,10 @@ experiment:
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
                     source: local
-                    hiddendomain_width: 1000
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
                     aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
 
@@ -752,3 +1374,9 @@ aligner_index:
 
 chip_genome:
     - hg38
+
+# domain_means:
+#     LMNB1.5kb: /DATA/usr/t.v.schaik/proj/3D_nucleus/results/ts180110_4DN_DataProcessing/results/HMM/bin-5kb/K562_LMNB1-5kb-combined_HMM.txt.gz
+
+encode_http:
+    https://www.encodeproject.org/files/{enc_id}/@@download/{enc_id}.fastq.gz

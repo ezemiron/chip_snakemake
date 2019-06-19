@@ -50,16 +50,21 @@ norm_list = lapply(names(exp_stats), function(s){
 })
 
 norm_table = do.call(cbind, norm_list)
+colnames(norm_table) = names(exp_stats)
 
 gm_mean_vec = apply(norm_table, 1, gm_mean)
 mean_vec = rowMeans(norm_table)
+log_mean_vec = rowMeans(log2(norm_table))
 
 bed_table = read.table(argv$bed, row.names=4, stringsAsFactors=F)
 match_vec = match(paste(bed_table[,1], bed_table[,2]),
                   paste(count_table[,1], count_table[,2]))
 
-mean_table = data.frame(transcript_id=rownames(bed_table),
-                        mean=log10(mean_vec[match_vec]),
-                        gm_mean=log10(gm_mean_vec[match_vec]))
+mean_table = data.frame(ID=rownames(bed_table),
+                        count_table[match_vec, ],
+                        norm_table[match_vec, ],
+                        mean=mean_vec[match_vec],
+                        log2_mean=log_mean_vec[match_vec],
+                        gm_mean=gm_mean_vec[match_vec])
 
 write.table(mean_table, quote=F, sep='\t', row.names=F)

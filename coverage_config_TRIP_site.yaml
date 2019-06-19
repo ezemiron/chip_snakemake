@@ -1,0 +1,31 @@
+outdir:
+    '/DATA/usr/c.leemans/projects/chip_snake/site_summary'
+
+site_summary:
+    TRIP_pools:
+        '/DATA/usr/c.leemans/projects/chip_snake/cl20190318_TRIP_pools.tsv'
+
+site_binsize:
+    TRIP_pools:
+        [250, 500, 1000, 2000, 3000, 4000, 5000, 10000, 25000, 50000]
+
+site_columns:
+    seqnames: 1
+    location: 3
+    ID: 4
+
+genome: hg38
+
+celltype: 'K562'
+
+chip_dir:
+    '/DATA/usr/c.leemans/projects/chip_snake/'
+
+chip_align_config:
+    '/DATA/usr/c.leemans/projects/chip_snake/config.yaml'
+chip_align:
+    '/DATA/usr/c.leemans/projects/chip_snake/chip_align.snakemake'
+
+
+use_encode_tracks: False
+encode_dir:  /DATA/usr/c.leemans/data/ChIP/bigwig/histone_and_remodelers/tracks

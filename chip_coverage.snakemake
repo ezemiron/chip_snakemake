@@ -38,10 +38,12 @@ def iter_expirements(config, celltype='all'):
 
 
 def get_all(config):
-    regex_means = '%s/means/%s_%s_%s_%s.txt'
+    regex_means = '%s/bed_means/%s_%s_%s_%s.txt'
+    regex_site = '%s/site_means/%s-%i_%s_%s_%s.txt'
     regex_dmeans = '%s/domain_means/%s_%s_%s_%s.txt'
     regex_peak = '%s/nearest_peak/%s_%s_%s_%s.txt'
-    regex_domain = '%s/domain_call/%s_%s_%s_%s.txt'
+    regex_nearest = '%s/nearest_domains-%i-%s/%s_%s_%s_%s.txt'
+    regex_domain = '%s/domains_call/%s_%s_%s_%s.txt'
     regex_window = '%s/window/%s_%s_%s_%s_%s_%s_%i_%i_%i.txt.gz'
     regex_emeans = '%s/encode_means/%s.txt'
     regex_ewindow = '%s/encode_window/%s_%s_%s_%s.txt.gz'
@@ -50,7 +52,7 @@ def get_all(config):
         for domain in config['domain_means']:
             for exp_list in iter_expirements(config, celltype):
                 ct, experiment, target, sample, info = exp_list
-                yield(regex_dmeans % (config['outdir'], domain, experiment,
+                yield(regex_dmeans % (config['chip_out'], domain, experiment,
                                       target, sample))
 
     if 'bed_summary' in config:
@@ -59,6 +61,13 @@ def get_all(config):
                 ct, experiment, target, sample, info = exp_list
                 yield(regex_means % (config['outdir'], bed, experiment,
                                      target, sample))
+    if 'site_summary' in config:
+        for site in config['site_summary']:
+            for size in config['site_binsize'][site]:
+                for exp_list in iter_expirements(config, celltype):
+                    ct, experiment, target, sample, info = exp_list
+                    yield(regex_site % (config['outdir'], site, size, experiment,
+                                        target, sample))
     if 'bed_window' in config:
         for bed in config['bed_window']:
             window_params = config['window_params'][bed]
@@ -95,8 +104,11 @@ def get_all(config):
         for bed in config['bed_nearest_domains']:
             for exp_list in iter_expirements(config, celltype):
                 ct, experiment, target, sample, info = exp_list
-                yield(regex_domain % (config['outdir'], bed, experiment,
-                                       target, sample))
+                width_list = info['hiddendomain_width']
+                for w in width_list:
+                    yield(regex_nearest % (config['outdir'], w,
+                                           info['hiddendomain_p'], bed,
+                                           experiment, target, sample))
 
     if config['use_encode_tracks']:
         if 'bed_summary' in config:
@@ -128,13 +140,26 @@ def get_encode_label(config):
 
 def get_peaks(config, wildcards):
     exp_dict = config['experiment'][config['celltype']][wildcards.experiment]
-    yield('%s/%s/%s/%s/%s/%s_%s_shared.txt' % (config['chip_out'],
-                                               config['genome'],
-                                               wildcards.peaktype,
-                                               config['celltype'],
-                                               wildcards.experiment,
-                                               wildcards.target,
-                                               wildcards.sample))
+    if wildcards.peaktype.startswith('domains'):
+        domain, bs, p = wildcards.peaktype.split(sep='-')
+        fname = '%s/%s/%s/%s/%s/%s_%s_%s_%s_shared.txt' % (config['chip_out'],
+                                                        config['genome'],
+                                                        wildcards.peaktype,
+                                                        config['celltype'],
+                                                        wildcards.experiment,
+                                                        wildcards.target,
+                                                        wildcards.sample,
+                                                        bs, p)
+    else:
+        fname = '%s/%s/%s/%s/%s/%s_%s_shared.txt' % (config['chip_out'],
+                                                     config['genome'],
+                                                     wildcards.peaktype,
+                                                     config['celltype'],
+                                                     wildcards.experiment,
+                                                     wildcards.target,
+                                                     wildcards.sample)
+
+    yield(fname)
 
 
 rule overlap_with_peak:
@@ -147,9 +172,10 @@ rule overlap_with_peak:
         "bedtools intersect -c -a {input.bed} -b {input.peaks} "
         "    > {output}"
 
+
 rule nearestPeak:
     input:
-        bed=lambda wildcards: config['bed_summary'][wildcards.bed],
+        bed=lambda wildcards: config['bed_nearest_domains'][wildcards.bed],
         peaks=lambda wildcards: get_peaks(config, wildcards)
     output:
         "{outdir}/nearest_{peaktype}/{bed}_{experiment}_{target}_{sample}.txt"
@@ -231,7 +257,8 @@ def get_bw(config, wildcards):
                                                        rep_list[r]))
 
 
-
+ruleorder: domain_means > means
+ruleorder: multiWigSummary > means
 
 rule compute_matrix:
     input:
@@ -286,31 +313,56 @@ def get_ctrl_input(config, wildcards):
 
 rule domain_means:
     input:
+        '{outdir}/domain_means/{bed}_{experiment}_{target}_{sample}.count',
+        '%s/%s/idxstats/%s/{experiment}/{target}_{sample}.txt' % (config['chip_out'],
+                                                                  config['genome'],
+                                                                  config['celltype'])
+    output:
+        '{outdir}/domain_means/{bed}_{experiment}_{target}_{sample}.txt'
+    shell:
+        "{chip_path}/scripts/compute_domain.R --counts {input[0]}"
+        "                                     --idxstats {input[1]} > {output}"
+
+
+
+rule domain_counts:
+    input:
         bed=lambda wildcards: config['domain_means'][wildcards.bed],
         exp=lambda wildcards: get_exp(config, wildcards),
+        exp_bai=lambda wildcards: ['%s.bai' % (fname) for fname in
+                                   get_exp(config, wildcards)],
         ip=lambda wildcards: get_ctrl_input(config, wildcards),
+        ip_bai=lambda wildcards: '%s.bai' % (get_ctrl_input(config, wildcards)),
     params:
         exp_label=lambda wildcards: list(get_exp_label(config, wildcards))
     threads:
         10
     output:
-        '{outdir}/domain_means/{bed}_{experiment}_{target}_{sample}.txt'
+        temp('{outdir}/domain_means/{bed}_{experiment}_{target}_{sample}.count')
     shell:
         "{chip_path}/scripts/compute_domain.sh -d {input.bed}"
         "                                      -b \"{input.ip} {input.exp}\""
-        "                                      -l \"{params.exp_label}\""
+        "                                      -l \"input {params.exp_label}\""
         "                                      -t {threads}"
         "                                      -o {output}"
 
 
+
+def get_mean_bed(config, wildcards):
+    bed_split = wildcards.bed.split('-')
+    if bed_split[-1].isdigit():
+        return('%s/site_bed/%s.bed' % (wildcards.outdir, wildcards.bed))
+    else:
+        return(config['bed_summary'][wildcards.bed])
+
 rule means:
     input:
-        bed=lambda wildcards: config['bed_summary'][wildcards.bed],
+        bed=lambda wildcards: get_mean_bed(config, wildcards),
         exp=lambda wildcards: get_exp(config, wildcards),
         ip=lambda wildcards: get_ctrl_input(config, wildcards),
         counts='{outdir}/chip_counts/{bed}_{experiment}_{target}_{sample}.txt'
     output:
-        '{outdir}/means/{bed}_{experiment}_{target}_{sample}.txt'
+        '{outdir}/{type}_means/{bed}_{experiment}_{target}_{sample}.txt'
     run:
         input_exp = ','.join(input.exp)
         shell("{chip_path}/scripts/compute_means.R --exp {input_exp} "
@@ -319,10 +371,9 @@ rule means:
               "                                    --input {input.ip} > {output}")
 
 
-
 rule multiBamSummary:
     input:
-        bed=lambda wildcards: config['bed_summary'][wildcards.bed],
+        bed=lambda wildcards: get_mean_bed(config, wildcards),
         exp=lambda wildcards: get_exp(config, wildcards),
         ip=lambda wildcards: get_ctrl_input(config, wildcards),
         exp_bai=lambda wildcards: ['%s.bai' % (s) for s in
@@ -342,6 +393,28 @@ rule multiBamSummary:
         "                         -b {input.ip} {input.exp}"
         "                         -out {output[0]}"
         "                         --outRawCounts {output[1]}"
+
+
+rule siteToBed:
+    input:
+        lambda wildcards: config['site_summary'][wildcards.site]
+    output:
+        temp('{outdir}/site_bed/{site}-{binsize}.bed')
+    params:
+        seqnames=lambda wildcards: config['site_columns']['seqnames'],
+        location=lambda wildcards: config['site_columns']['location'],
+        ID=lambda wildcards: config['site_columns']['ID'],
+        size='{binsize}'
+    shell:
+        "awk -vOFS='\t' '"
+        "BEGIN {{"
+        "    size={params.size}/2;"
+        "}}"
+        "{{"
+        "    start = ${params.location} - size;"
+        "    end = ${params.location} + size;"
+        "    print ${params.seqnames}, start, end, ${params.ID};"
+        "}}' {input} > {output}"
 
 
 # samtools idxstats
