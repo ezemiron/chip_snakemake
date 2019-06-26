@@ -41,8 +41,9 @@ experiment:
                     treatment:
                         [SRR6010166]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -57,8 +58,9 @@ experiment:
                     treatment:
                         [SRR6010168]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -73,8 +75,9 @@ experiment:
                     treatment:
                         [SRR6010170]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -90,8 +93,9 @@ experiment:
                     treatment:
                         [SRR6010174]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_dimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -106,8 +110,9 @@ experiment:
                     treatment:
                         [SRR6010173]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_dimethylation_site
                     track_bs: [1000]
                     keep_duplicates: False
@@ -123,8 +128,9 @@ experiment:
                     treatment:
                         [SRR6010175]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -139,8 +145,9 @@ experiment:
                     treatment:
                         [SRR6010177]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -155,8 +162,9 @@ experiment:
                     treatment:
                         [SRR6010178]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -171,8 +179,9 @@ experiment:
                     treatment:
                         [SRR6010180]
                     control:
-                        [SRR7441422]
+                        [SRR6010181]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -190,6 +199,7 @@ experiment:
                     control:
                         [SRR7441422]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -207,6 +217,7 @@ experiment:
                     control:
                         [SRR4423325, SRR4423326]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -223,6 +234,7 @@ experiment:
                     control:
                         [SRR1151537]
                     source: GEO
+                    control_type: low_GFP
                     SOFA: H2AK119_ubiquitylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -238,6 +250,7 @@ experiment:
                     control:
                         [SRR1151537]
                     source: GEO
+                    control_type: low_GFP
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000, 20000]
@@ -253,6 +266,7 @@ experiment:
                     control:
                         [SRR1151537]
                     source: GEO
+                    control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -268,6 +282,7 @@ experiment:
                     control:
                         [SRR1151537]
                     source: GEO
+                    control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -283,6 +298,7 @@ experiment:
                     control:
                         [SRR1151537]
                     source: GEO
+                    control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -298,6 +314,7 @@ experiment:
                     control:
                         [SRR1151537]
                     source: GEO
+                    control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -313,6 +330,7 @@ experiment:
                     control:
                         [SRR1151537]
                     source: GEO
+                    control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -328,6 +346,7 @@ experiment:
                     control:
                         [SRR1151537]
                     source: GEO
+                    control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -344,6 +363,7 @@ experiment:
                     control:
                         [SRR2148307]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -359,6 +379,7 @@ experiment:
                     control:
                         [SRR2148307]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -375,6 +396,7 @@ experiment:
                     control:
                         [SRR502109, SRR502110]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -420,6 +442,7 @@ experiment:
                     control:
                         [SRR5111209, SRR5111210]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -436,6 +459,7 @@ experiment:
                     control:
                         [SRR5111209, SRR5111210]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -453,6 +477,7 @@ experiment:
                   control:
                       [SRR5111209, SRR5111210]
                   source: GEO
+                  control_type: Input
                   SOFA: protein_binding_site
                   keep_duplicates: False
                   hiddendomain_width: [1000]
@@ -468,6 +493,7 @@ experiment:
                   control:
                       [SRR5111209, SRR5111210]
                   source: GEO
+                  control_type: Input
                   SOFA: protein_binding_site
                   keep_duplicates: False
                   hiddendomain_width: [1000]
@@ -488,6 +514,7 @@ experiment:
                     control2:
                         [ENCFF368UOC, ENCFF608MDV]
                     source: ENCODE
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -506,6 +533,7 @@ experiment:
                   control:
                       [SRR5111209, SRR5111210]
                   source: GEO
+                  control_type: Input
                   SOFA: protein_binding_site
                   keep_duplicates: False
                   hiddendomain_width: [1000]
@@ -521,6 +549,7 @@ experiment:
                   control:
                       [SRR5111209, SRR5111210]
                   source: GEO
+                  control_type: Input
                   SOFA: protein_binding_site
                   keep_duplicates: False
                   hiddendomain_width: [1000]
@@ -553,6 +582,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -568,6 +598,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300, 1000]
@@ -583,6 +614,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -598,6 +630,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -613,6 +646,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -628,6 +662,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -643,6 +678,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -658,6 +694,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -673,6 +710,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -688,6 +726,7 @@ experiment:
                     control:
                         [SRR502641]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -704,6 +743,7 @@ experiment:
                     control:
                         [SRR351761, SRR351762]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [300]
@@ -720,6 +760,7 @@ experiment:
                     control:
                         [SRR5287120, SRR5287121]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -752,6 +793,7 @@ experiment:
                     control:
                         [SRR5287106, SRR5287107]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -772,6 +814,7 @@ experiment:
                     control:
                         [SRR577521]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -789,6 +832,7 @@ experiment:
                     control:
                         [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: True
                     hiddendomain_width: [1000, 5000, 20000]
@@ -804,6 +848,7 @@ experiment:
                     control:
                         [SRR2085862, SRR2085863, SRR2085864]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000, 5000, 20000]
@@ -820,6 +865,7 @@ experiment:
                     control:
                         [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -835,6 +881,7 @@ experiment:
                     control:
                         [SRR2085862, SRR2085863, SRR2085864]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -851,6 +898,7 @@ experiment:
                     control:
                         [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -867,6 +915,7 @@ experiment:
                     control:
                         [SRR2085862, SRR2085863, SRR2085864]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -884,6 +933,7 @@ experiment:
                     control:
                         [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -899,6 +949,7 @@ experiment:
                     control:
                         [SRR2085862, SRR2085863, SRR2085864]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -915,6 +966,7 @@ experiment:
                     control:
                         [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
                     source: GEO
+                    control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -930,6 +982,7 @@ experiment:
                     control:
                         [SRR2085862, SRR2085863, SRR2085864]
                     source: GEO
+                    control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -946,6 +999,7 @@ experiment:
                     control:
                         [SRR2085912, SRR2085913, SRR2085914]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -962,6 +1016,7 @@ experiment:
                     control:
                         [SRR2085897, SRR2085898]
                     source: GEO
+                    control_type: IgG
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -979,6 +1034,7 @@ experiment:
                     control:
                         [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
                     source: GEO
+                    control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -994,6 +1050,7 @@ experiment:
                     control:
                         [SRR2085862, SRR2085863, SRR2085864]
                     source: GEO
+                    control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -1012,6 +1069,7 @@ experiment:
                     control:
                         [SRR3144864]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1028,6 +1086,7 @@ experiment:
                     control:
                         [SRR3144864]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1044,6 +1103,7 @@ experiment:
                     control:
                         [SRR3144864]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K122_acetylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1061,6 +1121,7 @@ experiment:
                     control:
                         [SRR402383]
                     source: GEO
+                    control_type: Input
                     SOFA: histone_modification
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1078,6 +1139,7 @@ experiment:
                     control:
                         [SRR401814]
                     source: GEO
+                    input_type: IgG
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1087,6 +1149,103 @@ experiment:
                     digestion: 'sonication'
                     is_paired: False
                     comment: "read depth is very low"
+            H3K79me2-G1:
+                GSM865277:
+                    treatment:
+                        [SRR401807]
+                    control:
+                        [SRR401804]
+                    source: GEO
+                    input_type: Input
+                    SOFA: H3K79_dimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K79me2-S:
+                GSM865278:
+                    treatment:
+                        [SRR401808]
+                    control:
+                        [SRR401805]
+                    source: GEO
+                    input_type: Input
+                    SOFA: H3K79_dimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K79me2-G2:
+                GSM865279:
+                    treatment:
+                        [SRR401809]
+                    control:
+                        [SRR401806]
+                    source: GEO
+                    input_type: Input
+                    SOFA: H3K79_dimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K4me3-G1:
+                GSM865280:
+                    treatment:
+                        [SRR401810]
+                    control:
+                        [SRR401804]
+                    source: GEO
+                    input_type: Input
+                    SOFA: H3K79_dimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K4me3-S:
+                GSM865281:
+                    treatment:
+                        [SRR401811]
+                    control:
+                        [SRR401805]
+                    source: GEO
+                    input_type: Input
+                    SOFA: H3K79_dimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K4me3-G2:
+                GSM865282:
+                    treatment:
+                        [SRR401812]
+                    control:
+                        [SRR401806]
+                    source: GEO
+                    input_type: Input
+                    SOFA: H3K79_dimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+
         Snyder2011:
             TBP:
                 ENCSR000EHA:
@@ -1095,6 +1254,7 @@ experiment:
                     control:
                         [SRR502667, SRR502668]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1111,6 +1271,7 @@ experiment:
                     control:
                         [SRR227650, SRR5331211, SRR5331212, SRR5331213]
                     source: GEO
+                    control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1127,6 +1288,7 @@ experiment:
                     control:
                         [SRR227650, SRR5331211, SRR5331212, SRR5331213] ## ENCODE might have used only SRR5331213
                     source: GEO
+                    control_type: Input
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1157,6 +1319,7 @@ experiment:
                     control:
                         [SRR227650, SRR5331211, SRR5331212, SRR5331213]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1188,6 +1351,7 @@ experiment:
                     control:
                         [SRR227650, SRR5331211, SRR5331212, SRR5331213]
                     source: GEO
+                    control_type: Input
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1225,6 +1389,7 @@ experiment:
                     control:
                         [SRR7070732]
                     source: GEO
+                    control_type: Input
                     SOFA: H4K5_acetylation_K8_acetylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
