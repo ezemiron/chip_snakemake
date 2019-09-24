@@ -10,15 +10,38 @@ configfile: "%s/config.yaml" % (chip_path)
 
 def get_all(config):
     regex_bw = '%s/%s/tracks/%s/%s/%ikb/%s_%s_r%i_%s_fcoc.bw'
+    regex_target_bw = '%s/%s/tracks/%s/%s/%ikb/%s_fcoc.bw'
+    regex_sample_bw = '%s/%s/tracks/%s/%s/%ikb/%s_%s_fcoc.bw'
     regex_idx = '%s/%s/idxstats/%s/%s/%s_%s.txt'
-    regex_corr = '%s/%s/stats/%s/%s/%s_%s_scatter.pdf'
     regex_np = '%s/%s/gff3/%s/%s/%s_%s_r%i_%s_%s.gff3'
+
+    regex_corr = '%s/%s/stats/%s/%s/%s_%s_scatter.pdf'
+    regex_target_corr = '%s/%s/stats/%s/%s/%ikb/%s_scatter.pdf'
+    regex_all_corr = '%s/%s/stats/%s/%ikb/%s_scatter.pdf'
+
     for genome in config['chip_genome']:
         for celltype in config['experiment']:
+            all_target_dict = {}
             for experiment in config['experiment'][celltype]:
                 exp_dict = config['experiment'][celltype][experiment]
                 for target in exp_dict:
                     target_dict = exp_dict[target]
+                    bs_list = [bs for sample in target_dict
+                               for bs in target_dict[sample]['track_bs']]
+                    if target in all_target_dict:
+                        all_target_dict[target].append(bs_list)
+                    else:
+                        all_target_dict[target] = [bs_list]
+
+                    if len(target_dict) > 1:
+                        for bs in bs_list:
+                            kb = bs / 1000
+                            yield(regex_target_bw % (config['chip_out'], genome,
+                                                     celltype, experiment, kb,
+                                                     target))
+                            yield(regex_target_corr % (config['chip_out'], genome,
+                                                       celltype, experiment, kb,
+                                                       target))
                     for sample in target_dict:
                         info_dict = target_dict[sample]
                         width = info_dict['hiddendomain_width']
@@ -27,10 +50,17 @@ def get_all(config):
                                   for w in width]
                         # domain.append('narrowPeak')
                         rep_list = info_dict['treatment']
-                        # if len(rep_list) > 1:
-                        #     yield(regex_corr % (config['chip_out'], genome,
-                        #                         celltype, experiment, target,
-                        #                         sample))
+
+                        if len(rep_list) > 1:
+                            if 'track_bs' in info_dict:
+                                for bs in info_dict['track_bs']:
+                                    kb = bs / 1000
+                                    yield(regex_corr % (config['chip_out'], genome,
+                                                        celltype, experiment, target,
+                                                        sample))
+                                    yield(regex_sample_bw % (config['chip_out'], genome,
+                                                             celltype, experiment, kb,
+                                                             target, sample))
                         for rep in range(0, len(rep_list)):
                             if 'track_bs' in info_dict:
                                 for bs in info_dict['track_bs']:
@@ -48,6 +78,16 @@ def get_all(config):
                                                    rep_list[rep], region))
                         yield(regex_idx % (config['chip_out'], genome, celltype,
                                            experiment, target, sample))
+            for target in all_target_dict:
+                bs_list_list = all_target_dict[target]
+                if len(bs_list_list) > 1:
+                    for bs_list in bs_list_list:
+                        for bs in bs_list:
+                            kb = bs / 1000
+                            yield(regex_all_corr % (config['chip_out'], genome,
+                                                    celltype, kb, target))
+
+
 
 
 rule all_chip_align:
@@ -55,12 +95,11 @@ rule all_chip_align:
         [out_file for out_file in get_all(config)]
 
 
-
 rule plot_correlation:
     input:
-        '{outdir}/stats/{genome}/{experiment}/{target}_{sample}.npz'
+        '{outdir}/stats/{path}.npz'
     output:
-        '{outdir}/stats/{genome}/{experiment}/{target}_{sample}_scatter.pdf'
+        '{outdir}/stats/{path}_scatter.pdf'
     params:
         cor_method=config['replicate_cor_method']
     shell:
@@ -70,27 +109,150 @@ rule plot_correlation:
         "                -p scatterplot"
 
 
+
+
+
+
+def get_compare_all(config, wildcards):
+    for celltype in config['experiment']:
+        for experiment in config['experiment'][wildcards.celltype]:
+            exp_dict = config['experiment'][wildcards.celltype][experiment]
+            if wildcards.target in exp_dict:
+                target_dict = exp_dict[wildcards.target]
+                if len(target_dict) > 1:
+                    yield('%s/tracks/%s/%s/%s/%s_fcoc.bw' % (wildcards.outdir,
+                                                             wildcards.celltype,
+                                                             experiment,
+                                                             wildcards.kb,
+                                                             wildcards.target))
+                else:
+                    for sample in target_dict:
+                        yield('%s/tracks/%s/%s/%s/%s_%s_fcoc.bw' % (wildcards.outdir,
+                                                                    wildcards.celltype,
+                                                                    experiment,
+                                                                    wildcards.kb,
+                                                                    wildcards.target,
+                                                                    sample))
+rule compare_all:
+    input:
+        lambda wildcards: get_compare_all(config, wildcards)
+    output:
+        '{outdir}/stats/{celltype, [^/]+}/{kb}/{target, [^_]+}.npz'
+    threads:
+        10
+    shell:
+        "multiBigwigSummary bins --bwfiles {input}"
+        "                        -p {threads}"
+        "                        -out {output}"
+
+def get_compare_bw(config, wildcards):
+    exp_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
+    target_dict = exp_dict[wildcards.target]
+    for sample in target_dict:
+        rep_list = exp_dict[wildcards.target][sample]['treatment']
+        if len(rep_list) > 1:
+            yield('%s/tracks/%s/%s/%s/%s_%s_fcoc.bw' % (wildcards.outdir,
+                                                        wildcards.celltype,
+                                                        wildcards.experiment,
+                                                        wildcards.kb,
+                                                        wildcards.target,
+                                                        sample))
+        else:
+            yield('%s/tracks/%s/%s/%s/%s_%s_r1_%s_fcoc.bw' % (wildcards.outdir,
+                                                              wildcards.celltype,
+                                                              wildcards.experiment,
+                                                              wildcards.kb,
+                                                              wildcards.target,
+                                                              sample,
+                                                              rep_list[0]))
+
+rule compare_target:
+    input:
+        lambda wildcards: get_compare_bw(config, wildcards)
+    output:
+        '{outdir}/stats/{celltype}/{experiment}/{kb}/{target, [^_]+}.npz',
+        '{outdir}/stats/{celltype}/{experiment}/{kb}/{target, [^_]+}.txt'
+    threads:
+        10
+    wildcard_constraints:
+        celltype='[^/]+',
+        experiment='[^/]+',
+        kb='[0-9]+kb'
+    shell:
+        "multiBigwigSummary bins --bwfiles {input}"
+        "                        -p {threads}"
+        "                        -out {output[0]}"
+        "                        --outRawCounts {output[1]}"
+
+def get_compare_bw_rep(config, wildcards):
+    exp_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
+    rep_list = exp_dict[wildcards.target][wildcards.sample]['treatment']
+    for rep in range(0, len(rep_list)):
+        yield('%s/tracks/%s/%s/%s/%s_%s_r%i_%s_fcoc.bw' % (wildcards.outdir,
+                                                           wildcards.celltype,
+                                                           wildcards.experiment,
+                                                           wildcards.kb,
+                                                           wildcards.target,
+                                                           wildcards.sample,
+                                                           rep+1, rep_list[rep]))
+
+
+rule make_compare_bw:
+    input:
+        '{outdir}/{genome}/stats/{path}.txt',
+        "{outdir}/{genome}/chrom_sizes.txt"
+    output:
+        '{outdir}/{genome}/tracks/{path}_fcoc.bw'
+    wildcard_constraints:
+        genome="[^/]+",
+    threads:
+        5
+    shell:
+        "{chip_path}/scripts/bigWigCompare_to_bw.R -i {input[0]}"
+        "                                          -cs {input[1]}"
+        "                                          -t {threads}"
+        "                                          -bw {output}"
+
+
+rule compare_bw_rep:
+    input:
+        lambda wildcards: get_compare_bw_rep(config, wildcards)
+    output:
+        '{outdir}/stats/{celltype}/{experiment}/{kb}/{target}_{sample}.npz',
+        '{outdir}/stats/{celltype}/{experiment}/{kb}/{target}_{sample}.txt'
+    threads:
+        10
+    wildcard_constraints:
+        target="[^_]+",
+        sample="[^_]+",
+        celltype='[^/]+',
+        experiment='[^/]+',
+        kb='[0-9]+kb'
+    shell:
+        "multiBigwigSummary bins --bwfiles {input}"
+        "                        -p {threads}"
+        "                        -out {output[0]}"
+        "                        --outRawCounts {output[1]}"
+
+
 def get_compare_input(config, wildcards):
-    exp_dict = config['experiment'][wildcards.genome][wildcards.experiment]
+    exp_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
     rep_list = exp_dict[wildcards.target][wildcards.sample]['treatment']
     for rep in range(0, len(rep_list)):
         yield('%s/filtered/%s/%s/%s_%s_r%i_%s.bam' % (wildcards.outdir,
-                                                      wildcards.genome,
+                                                      wildcards.celltype,
                                                       wildcards.experiment,
                                                       wildcards.target,
                                                       wildcards.sample,
                                                       rep+1, rep_list[rep]))
 
-
-
-
-rule compare_replicates:
+rule compare_bam_replicates:
     input:
         bam=lambda wildcards: get_compare_input(config, wildcards),
         bai=lambda wildcards: [''.join((name, '.bai')) for name in
                                get_compare_input(config, wildcards)]
     output:
-        '{outdir}/stats/{genome}/{experiment}/{target}_{sample}.npz'
+        '{outdir}/stats/{celltype}/{experiment}/{target}_{sample}.npz'
     threads:
         10
     shell:
@@ -275,20 +437,19 @@ def get_compare_ctrl(config, wildcards):
     rep = int(wildcards.rep.replace('r', '')) - 1
     exp_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
     srr_id = '_'.join(exp_dict[wildcards.target][wildcards.sample]['control'])
-    return(['%s/%s/filtered/control/%s.bam' % (wildcards.outdir,
-                                               wildcards.genome, srr_id),
-            '%s/%s/filtered/control/%s.bam.bai' % (wildcards.outdir,
-                                                   wildcards.genome, srr_id)])
+    return('%s/%s/coverage/control/%skb/%s.bw' % (wildcards.outdir,
+                                                   wildcards.genome,
+                                                   wildcards.bs, srr_id))
 
 
 
 rule bamcompare:
     input:
-        bam='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam',
-        bai='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam.bai',
+        bw='{outdir}/{genome}/coverage/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}.bw',
         ctrl=lambda wildcards: get_compare_ctrl(config, wildcards)
     output:
-        '{outdir}/{genome}/tracks/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}_fcoc.bw'
+        temp('{outdir}/{genome}/stats/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}.npz'),
+        '{outdir}/{genome}/stats/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}.txt'
     log:
         '{outdir}/{genome}/log/tracks/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}_fcoc.log'
     params:
@@ -296,19 +457,24 @@ rule bamcompare:
         binsize = lambda wildcards: int(float(wildcards.bs) * 1000)
     threads:
         10
-    run:
-        cmd=("bamCompare --minMappingQuality {params.min_mapq} "
-             "           --operation ratio "
-             "           --skipNAs "
-             "           --pseudocount 0"
-             "           -p {threads} "
-             "           -bs {params.binsize}"
-             "           -b1 {input.bam} "
-             "           -b2 {input.ctrl[0]} "
-             "           -of bigwig "
-             "           --verbose"
-             "           -o {output} > {log} 2>&1")
-        shell(' '.join(('echo "', cmd, '"; ',cmd)))
+    shell:
+        "multiBigwigSummary bins --bwfiles {input}"
+        "                        -p {threads}"
+        "                        -out {output[0]}"
+        "                        --outRawCounts {output[1]} > {log} 2>&1"
+        #
+        # cmd=("bamCompare --minMappingQuality {params.min_mapq} "
+        #      "           --operation ratio "
+        #      "           --skipNAs "
+        #      "           --pseudocount 0"
+        #      "           -p {threads} "
+        #      "           -bs {params.binsize}"
+        #      "           -b1 {input.bam} "
+        #      "           -b2 {input.ctrl[0]} "
+        #      "           -of bigwig "
+        #      "           --verbose"
+        #      "           -o {output} > {log} 2>&1")
+        # shell(' '.join(('echo "', cmd, '"; ',cmd)))
 
 def get_greylist(config, wildcards):
     rep = int(wildcards.rep.replace('r', '')) - 1
@@ -320,7 +486,7 @@ def get_greylist(config, wildcards):
 rule bw_pseudo:
     input:
         bw='{outdir}/{genome}/coverage/{name}.bw',
-        sizes=lambda wildcards: config['chrom_sizes'][wildcards.genome]
+        sizes='{outdir}/{genome}/chrom_sizes.txt'
     output:
         '{outdir}/{genome}/coverage/{name}_pseudo.bw'
     shell:
@@ -330,17 +496,23 @@ rule bw_pseudo:
 
 rule bw_coverage:
     input:
-        bam='{outdir}/{genome}/filtered/{name}.bam',
-        bai='{outdir}/{genome}/filtered/{name}.bam.bai'
+        bam='{outdir}/{genome}/filtered/{path}/{name}.bam',
+        bai='{outdir}/{genome}/filtered/{path}/{name}.bam.bai',
+        chromsize="{outdir}/{genome}/chrom_sizes.txt"
     output:
-        '{outdir}/{genome}/coverage/{name}.bw'
+        '{outdir}/{genome}/coverage/{path}/{bs}kb/{name}.bw'
+    params:
+        binsize = lambda wildcards: int(float(wildcards.bs) * 1000)
     threads:
-        10
+        20
     shell:
-        "bamCoverage -p {threads}"
-        "            -b {input.bam}"
-        "            -o {output}"
-        "            -bs 1"
+        "scripts/sambambaToBw.sh -t {threads}"
+        "                        -b {input.bam}"
+        "                        -o {output}"
+        "                        -w {params.binsize}"
+        "                        -c {input.chromsize}"
+
+
 
 
 rule filter_blackgrey_ctrl:

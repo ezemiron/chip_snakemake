@@ -2,6 +2,183 @@ chip_out:
     /DATA/usr/c.leemans/projects/chip_snake
 
 experiment:
+    HepG2:
+        Bernstein2011:
+            H2AFZ:
+                ENCSR000AOK:
+                    treatment:
+                        [SRR227639, SRR227640]
+                    control:
+                        [SRR5331195, SRR5331196, SRR5331189, SRR5331190,
+                         SRR5331191, SRR5331192, SRR5331193, SRR5331194,
+                         SRR5331187, SRR5331188, SRR5331185, SRR5331186]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H2AFZ
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K9me3:
+                ENCSR000ATD:
+                    treatment:
+                        [SRR568329, SRR568330]
+                    control:
+                        [SRR5331195, SRR5331196, SRR5331189, SRR5331190,
+                         SRR5331191, SRR5331192, SRR5331193, SRR5331194,
+                         SRR5331187, SRR5331188, SRR5331185, SRR5331186]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K9_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+            H3K4me2:
+                ENCSR000AMC:
+                    treatment:
+                        [SRR227466, SRR227467]
+                    control:
+                        [SRR5331195, SRR5331196, SRR5331189, SRR5331190,
+                         SRR5331191, SRR5331192, SRR5331193, SRR5331194,
+                         SRR5331187, SRR5331188, SRR5331185, SRR5331186]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K4_dimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
+        Ernst2011:
+            H3K27ac:
+                treatment:
+                    [SRR094238, SRR094239]
+                control:
+                    [SRR094253, SRR094254]
+                source: GEO
+                control_type: Input
+                SOFA: H3K27_acetylation_site
+                keep_duplicates: False
+                hiddendomain_width: [1000]
+                hiddendomain_p: 0.9
+                aligner: bowtie2
+                track_bs: [1000]
+                digestion: sonication
+                is_paired: False
+            H3K4me3:
+                treatment:
+                    [SRR094247, SRR094248]
+                control:
+                    [SRR094253, SRR094254]
+                source: GEO
+                control_type: Input
+                SOFA: H3K4_trimethylation_site
+                keep_duplicates: False
+                hiddendomain_width: [1000]
+                hiddendomain_p: 0.9
+                aligner: bowtie2
+                track_bs: [1000]
+                digestion: sonication
+                is_paired: False
+            H4K20me1:
+                treatment:
+                    [SRR094251, SRR094252]
+                control:
+                    [SRR094253, SRR094254]
+                source: GEO
+                control_type: Input
+                SOFA: H4K20_monomethylation_site
+                keep_duplicates: False
+                hiddendomain_width: [1000]
+                hiddendomain_p: 0.9
+                aligner: bowtie2
+                track_bs: [1000]
+                digestion: sonication
+                is_paired: False
+            H3K4me2:
+                treatment:
+                    [SRR094245, SRR094246]
+                control:
+                    [SRR094253, SRR094254]
+                source: GEO
+                control_type: Input
+                SOFA: H3K4_dimethylation_site
+                keep_duplicates: False
+                hiddendomain_width: [1000]
+                hiddendomain_p: 0.9
+                aligner: bowtie2
+                track_bs: [1000]
+                digestion: sonication
+                is_paired: False
+            H3K4me1:
+                treatment:
+                    [SRR094244]
+                control:
+                    [SRR094253, SRR094254]
+                source: GEO
+                control_type: Input
+                SOFA: H3K4_monomethylation_site
+                keep_duplicates: False
+                hiddendomain_width: [1000]
+                hiddendomain_p: 0.9
+                aligner: bowtie2
+                track_bs: [1000]
+                digestion: sonication
+                is_paired: False
+            H3K36me3:
+                treatment:
+                    [SRR094242, SRR094243]
+                control:
+                    [SRR094253, SRR094254]
+                source: GEO
+                control_type: Input
+                SOFA: H3K36_trimethylation_site
+                keep_duplicates: False
+                hiddendomain_width: [1000]
+                hiddendomain_p: 0.9
+                aligner: bowtie2
+                track_bs: [1000]
+                digestion: sonication
+                is_paired: False
+            H3K9ac:
+                treatment:
+                    [SRR094249, SRR094250]
+                control:
+                    [SRR094253, SRR094254]
+                source: GEO
+                control_type: Input
+                SOFA: H3K9_acetylation_site
+                keep_duplicates: False
+                hiddendomain_width: [1000]
+                hiddendomain_p: 0.9
+                aligner: bowtie2
+                track_bs: [1000]
+                digestion: sonication
+                is_paired: False
+            H3K27me3:
+                treatment:
+                    [SRR094240, SRR094241]
+                control:
+                    [SRR094253, SRR094254]
+                source: GEO
+                control_type: Input
+                SOFA: H3K27_trimethylation_site
+                keep_duplicates: False
+                hiddendomain_width: [1000]
+                hiddendomain_p: 0.9
+                aligner: bowtie2
+                track_bs: [1000]
+                digestion: sonication
+                is_paired: False
     HCT116:
         Baranello2016:
             TOP1:
@@ -17,6 +194,286 @@ experiment:
                     hiddendomain_p: 0.9
                     aligner: bowtie2
                     track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+    Hap1:
+        Schick2019:
+            H3K4me1:
+                GSM2897163-4:
+                    treatment:
+                        [SRR6410072, SRR6410073, SRR6410074]
+                    control:
+                        [SRR6410081, SRR6410082, SRR6410083]
+                    source: GEO
+                    control_type: IgG
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Diagenode pAb-194-050"
+                    comment:
+                        ("similar ab had 0% off-target for H3K4me2/me3 in Shah et al."
+                         "ChIPmentation on 2 clones (1102-3(1x) and 921-7(2x))")
+                    digestion: sonication
+                    is_paired: False
+            H3K4me3:
+                GSM2897166-8:
+                    treatment:
+                        [SRR6410075, SRR6410076, SRR6410077]
+                    control:
+                        [SRR6410081, SRR6410082, SRR6410083]
+                    source: GEO
+                    control_type: IgG
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIPmentation on 2 clones (1102-3(1x) and 921-7(2x))"
+                    digestion: sonication
+                    is_paired: False
+            # H3K9me3:
+            #     GSM2897169-1:
+            #         treatment:
+            #             [SRR6410078, SRR6410079, SRR6410080]
+            #         control:
+            #             [SRR6410081, SRR6410082, SRR6410083]
+            #         source: GEO
+            #         control_type: IgG
+            #         SOFA: H3K9_trimethylation_site
+            #         keep_duplicates: False
+            #         hiddendomain_width: [1000]
+            #         hiddendomain_p: 0.9
+            #         aligner: bowtie2
+            #         track_bs: [1000, 5000, 20000]
+            #         comment: "ChIPmentation on 2 clones (1102-3(1x) and 921-7(2x))"
+            #         digestion: sonication
+            #         is_paired: False
+            H3K36me3:
+                GSM2897160-2:
+                    treatment:
+                        [SRR6410069, SRR6410070, SRR6410071]
+                    control:
+                        [SRR6410081, SRR6410082, SRR6410083]
+                    source: GEO
+                    control_type: IgG
+                    SOFA: H3K36_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIPmentation on 2 clones (1102-3(1x) and 921-7(2x))"
+                    digestion: sonication
+                    is_paired: False
+            H3K27me3:
+                GSM2897158-9:
+                    treatment:
+                        [SRR6410067, SRR6410068]
+                    control:
+                        [SRR6410081, SRR6410082, SRR6410083]
+                    source: GEO
+                    control_type: IgG
+                    SOFA: H3K36_trimethylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    antibody: "Diagenode pAB-196-050"
+                    aligner: bowtie2
+                    track_bs: [1000, 5000, 20000]
+                    comment: "ChIPmentation on 2 clones (1102-3(1x) and 921-7(1x))"
+                    digestion: sonication
+                    is_paired: False
+            H3K27ac:
+                GSM2897155-7:
+                    treatment:
+                        [SRR6410064, SRR6410065, SRR6410066]
+                    control:
+                        [SRR6410081, SRR6410082, SRR6410083]
+                    source: GEO
+                    control_type: IgG
+                    SOFA: H3K27_acetylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    antibody: "Millipore 07-499"
+                    comment: "ChIPmentation on 2 clones (1102-3(2x) and 921-7(1x))"
+                    digestion: sonication
+                    is_paired: False
+                GSM2897181:
+                    treatment:
+                        [SRR6410090]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K27_acetylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIP-seq on clone C631"
+                    digestion: sonication
+                    is_paired: False
+            CTCF:
+                GSM2897151:
+                    treatment:
+                        [SRR6410060]
+                    control:
+                        [SRR6410081, SRR6410082, SRR6410083]
+                    source: GEO
+                    control_type: IgG
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIPmentation on 2 clones (1102-3(2x) and 921-7(1x))"
+                    digestion: sonication
+                    is_paired: False
+            ARID1A:
+                GSM2897175-6:
+                    treatment:
+                        [SRR6410084, SRR6410085]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIP-seq on clone C631"
+                    digestion: sonication
+                    is_paired: False
+            ARID1B:
+                GSM2897177:
+                    treatment:
+                        [SRR6410086]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIP-seq on clone C631"
+                    digestion: sonication
+                    is_paired: False
+            ARID2:
+                GSM2897178-9:
+                    treatment:
+                        [SRR6410087, SRR6410088]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment:
+                        ("ChIP-seq on clone C631. Abreviations 'NB' and 'PA5'"
+                         "in file name. Probably different antibody's, but not sure")
+                    digestion: sonication
+                    is_paired: False
+            BRD4:
+                GSM2897180:
+                    treatment:
+                        [SRR6410089]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIP-seq on clone C631"
+                    digestion: sonication
+                    is_paired: False
+            PBRM1:
+                GSM2897188:
+                    treatment:
+                        [SRR6410097]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIP-seq on clone C631"
+                    digestion: sonication
+                    is_paired: False
+            POL3:
+                GSM2897189:
+                    treatment:
+                        [SRR6410098]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIP-seq on clone C631"
+                    digestion: sonication
+                    is_paired: False
+            SMARCA2:
+                GSM2897190:
+                    treatment:
+                        [SRR6410099]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIP-seq on clone C631"
+                    digestion: sonication
+                    is_paired: False
+            SMARCA4:
+                GSM2897191-2:
+                    treatment:
+                        [SRR6410100, SRR6410101]
+                    control:
+                        [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
+                    source: GEO
+                    control_type: Input
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    comment: "ChIP-seq on clone C631"
                     digestion: sonication
                     is_paired: False
     K562:

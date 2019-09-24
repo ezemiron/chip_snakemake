@@ -399,7 +399,7 @@ rule siteToBed:
     input:
         lambda wildcards: config['site_summary'][wildcards.site]
     output:
-        temp('{outdir}/site_bed/{site}-{binsize}.bed')
+        '{outdir}/site_bed/{site}-{binsize}.bed'
     params:
         seqnames=lambda wildcards: config['site_columns']['seqnames'],
         location=lambda wildcards: config['site_columns']['location'],
