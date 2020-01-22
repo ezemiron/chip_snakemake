@@ -16,6 +16,8 @@ experiment:
                     control_type: Input
                     SOFA: H2AFZ
                     keep_duplicates: False
+                    DOI: 10.1038/nature11247
+                    PMID: 22955616
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -34,6 +36,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
+                    DOI: 10.1038/nature11247
+                    PMID: 22955616
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -52,6 +56,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_dimethylation_site
                     keep_duplicates: False
+                    DOI: 10.1038/nature11247
+                    PMID: 22955616
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -59,126 +65,186 @@ experiment:
                     digestion: 'sonication'
                     is_paired: False
         Ernst2011:
+            CTCF:
+                GSM646353:
+                    treatment:
+                        [SRR094236, SRR094237]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K27_acetylation_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Millipore 07-729"
             H3K27ac:
-                treatment:
-                    [SRR094238, SRR094239]
-                control:
-                    [SRR094253, SRR094254]
-                source: GEO
-                control_type: Input
-                SOFA: H3K27_acetylation_site
-                keep_duplicates: False
-                hiddendomain_width: [1000]
-                hiddendomain_p: 0.9
-                aligner: bowtie2
-                track_bs: [1000]
-                digestion: sonication
-                is_paired: False
+                GSM646355:
+                    treatment:
+                        [SRR094238, SRR094239]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K27_acetylation_site
+                    keep_duplicates: False
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Abcam ab4729"
             H3K4me3:
-                treatment:
-                    [SRR094247, SRR094248]
-                control:
-                    [SRR094253, SRR094254]
-                source: GEO
-                control_type: Input
-                SOFA: H3K4_trimethylation_site
-                keep_duplicates: False
-                hiddendomain_width: [1000]
-                hiddendomain_p: 0.9
-                aligner: bowtie2
-                track_bs: [1000]
-                digestion: sonication
-                is_paired: False
+                GSM646364:
+                    treatment:
+                        [SRR094247, SRR094248]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K4_trimethylation_site
+                    keep_duplicates: False
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Milipore 07-473"
+                    comment: ("~75% cross-reactivity with K4me2 "
+                              "according to Shah et al. 2018. "
+                              "56% IP, 81% PA specificity. 54% IP efficiency")
             H4K20me1:
-                treatment:
-                    [SRR094251, SRR094252]
-                control:
-                    [SRR094253, SRR094254]
-                source: GEO
-                control_type: Input
-                SOFA: H4K20_monomethylation_site
-                keep_duplicates: False
-                hiddendomain_width: [1000]
-                hiddendomain_p: 0.9
-                aligner: bowtie2
-                track_bs: [1000]
-                digestion: sonication
-                is_paired: False
+                GSM646368:
+                    treatment:
+                        [SRR094251, SRR094252]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H4K20_monomethylation_site
+                    keep_duplicates: False
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Abcam ab9051"
             H3K4me2:
-                treatment:
-                    [SRR094245, SRR094246]
-                control:
-                    [SRR094253, SRR094254]
-                source: GEO
-                control_type: Input
-                SOFA: H3K4_dimethylation_site
-                keep_duplicates: False
-                hiddendomain_width: [1000]
-                hiddendomain_p: 0.9
-                aligner: bowtie2
-                track_bs: [1000]
-                digestion: sonication
-                is_paired: False
+                GSM646362:
+                    treatment:
+                        [SRR094245, SRR094246]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K4_dimethylation_site
+                    keep_duplicates: False
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Abcam ab7766"
+                    comment: ("~20% cross-reactivity with both K4me3 and "
+                              "K4me1 according to Shah et al. 2018. "
+                              "80% IP, 57% PA specificity. 55% IP efficiency")
             H3K4me1:
-                treatment:
-                    [SRR094244]
-                control:
-                    [SRR094253, SRR094254]
-                source: GEO
-                control_type: Input
-                SOFA: H3K4_monomethylation_site
-                keep_duplicates: False
-                hiddendomain_width: [1000]
-                hiddendomain_p: 0.9
-                aligner: bowtie2
-                track_bs: [1000]
-                digestion: sonication
-                is_paired: False
+                GSM646361:
+                    treatment:
+                        [SRR094244]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K4_monomethylation_site
+                    keep_duplicates: False
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Abcam ab8895"
+                    comment: ("little cross-reactivity according to "
+                              "Shah et al. 2018. "
+                              "90% IP, 96% PA specificity. 64% IP efficiency")
             H3K36me3:
-                treatment:
-                    [SRR094242, SRR094243]
-                control:
-                    [SRR094253, SRR094254]
-                source: GEO
-                control_type: Input
-                SOFA: H3K36_trimethylation_site
-                keep_duplicates: False
-                hiddendomain_width: [1000]
-                hiddendomain_p: 0.9
-                aligner: bowtie2
-                track_bs: [1000]
-                digestion: sonication
-                is_paired: False
+                GSM646359:
+                    treatment:
+                        [SRR094242, SRR094243]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K36_trimethylation_site
+                    keep_duplicates: False
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Abcam ab9050"
             H3K9ac:
-                treatment:
-                    [SRR094249, SRR094250]
-                control:
-                    [SRR094253, SRR094254]
-                source: GEO
-                control_type: Input
-                SOFA: H3K9_acetylation_site
-                keep_duplicates: False
-                hiddendomain_width: [1000]
-                hiddendomain_p: 0.9
-                aligner: bowtie2
-                track_bs: [1000]
-                digestion: sonication
-                is_paired: False
+                GSM646366:
+                    treatment:
+                        [SRR094249, SRR094250]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K9_acetylation_site
+                    keep_duplicates: False
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Abcam ab4441"
             H3K27me3:
-                treatment:
-                    [SRR094240, SRR094241]
-                control:
-                    [SRR094253, SRR094254]
-                source: GEO
-                control_type: Input
-                SOFA: H3K27_trimethylation_site
-                keep_duplicates: False
-                hiddendomain_width: [1000]
-                hiddendomain_p: 0.9
-                aligner: bowtie2
-                track_bs: [1000]
-                digestion: sonication
-                is_paired: False
+                GSM646357:
+                    treatment:
+                        [SRR094240, SRR094241]
+                    control:
+                        [SRR094253, SRR094254]
+                    source: GEO
+                    control_type: Input
+                    SOFA: H3K27_trimethylation_site
+                    keep_duplicates: False
+                    PMID: 21441907
+                    DOI: 10.1038/nature09906
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Milipore 07-449"
     HCT116:
         Baranello2016:
             TOP1:
@@ -190,6 +256,8 @@ experiment:
                     source: GEO
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 27058666
+                    DOI: 10.1016/j.cell.2016.02.036
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -208,6 +276,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -228,6 +298,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -262,6 +334,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -279,6 +353,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     antibody: "Diagenode pAB-196-050"
@@ -297,6 +373,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -314,6 +392,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -331,6 +411,8 @@ experiment:
                     control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -348,6 +430,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -365,6 +449,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -382,6 +468,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -401,6 +489,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -418,6 +508,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -435,6 +527,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -452,6 +546,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -467,6 +563,8 @@ experiment:
                         [SRR6410093, SRR6410094, SRR6410095, SRR6410096]
                     source: GEO
                     control_type: Input
+                    DOI: 10.1038/s41588-019-0413-z
+                    PMID: 31133746
                     SOFA: protein_binding_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -503,6 +601,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -520,6 +620,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -537,6 +639,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -557,6 +661,8 @@ experiment:
                     keep_duplicates: False
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     aligner: bowtie2
                     track_bs: [1000]
                     antibody: "Thermo Fisher 710796, Lot QL230606, anti-H3K4me2"
@@ -575,6 +681,8 @@ experiment:
                     keep_duplicates: False
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     aligner: bowtie2
                     antibody: "EMD Millipore 05-1338, Lot 2757107, anti-H3K4me2"
                     digestion: sonication
@@ -590,6 +698,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -607,6 +717,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -624,6 +736,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -641,6 +755,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: False
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -659,8 +775,11 @@ experiment:
                     control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
+                    PMID: 30244833
+                    DOI: 10.1016/j.molcel.2018.08.015
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     antibody: "Koide Lab 309M3B recombinant anti-H3K9me3.3"
@@ -677,6 +796,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 28619718
+                    DOI: 10.1126/science.aal2066
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -694,6 +815,8 @@ experiment:
                     control_type: low_GFP
                     SOFA: H2AK119_ubiquitylation_site
                     keep_duplicates: False
+                    PMID: 26748712
+                    DOI: 10.1016/j.celrep.2015.12.034
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -710,12 +833,16 @@ experiment:
                     control_type: low_GFP
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
+                    PMID: 26748712
+                    DOI: 10.1016/j.celrep.2015.12.034
                     hiddendomain_width: [1000, 20000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
+                    hmmr: [5000]
                     digestion: unknown
                     is_paired: False
+                    antibody: "Milipore 07-449"
             CBX2-GFP:
                 GSM1319305:
                     treatment:
@@ -726,6 +853,8 @@ experiment:
                     control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 26748712
+                    DOI: 10.1016/j.celrep.2015.12.034
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -742,6 +871,8 @@ experiment:
                     control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 26748712
+                    DOI: 10.1016/j.celrep.2015.12.034
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -758,6 +889,8 @@ experiment:
                     control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 26748712
+                    DOI: 10.1016/j.celrep.2015.12.034
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -774,6 +907,8 @@ experiment:
                     control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 26748712
+                    DOI: 10.1016/j.celrep.2015.12.034
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -790,6 +925,8 @@ experiment:
                     control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 26748712
+                    DOI: 10.1016/j.celrep.2015.12.034
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -806,6 +943,8 @@ experiment:
                     control_type: low_GFP
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 26748712
+                    DOI: 10.1016/j.celrep.2015.12.034
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -823,11 +962,16 @@ experiment:
                     control_type: Input
                     SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
+                    GSE: GSE71809
+                    PMID: 28301528
+                    DOI: 10.1371/journal.pone.0173723
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     digestion: MNase
+                    antibody: 'ab1220 Abcam'
                     is_paired: False
             H3K9me3:
                 ab8898:
@@ -839,11 +983,16 @@ experiment:
                     control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
+                    GSE: GSE71809
+                    PMID: 28301528
+                    DOI: 10.1371/journal.pone.0173723
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     digestion: MNase
+                    antibody: 'ab8898 Abcam'
                     is_paired: False
         Struhl2011:
             NELFE:
@@ -856,6 +1005,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -902,6 +1053,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -919,6 +1072,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -937,6 +1092,8 @@ experiment:
                   control_type: Input
                   SOFA: protein_binding_site
                   keep_duplicates: False
+                  PMID: 22955616
+                  DOI: 10.1038/nature11247
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
@@ -953,6 +1110,26 @@ experiment:
                   control_type: Input
                   SOFA: protein_binding_site
                   keep_duplicates: False
+                  PMID: 22955616
+                  DOI: 10.1038/nature11247
+                  hiddendomain_width: [1000]
+                  hiddendomain_p: 0.9
+                  aligner: bowtie2
+                  track_bs: [1000]
+                  digestion: 'sonication'
+                  is_paired: True
+            BRCA1:
+                ENCSR223MLH:
+                  treatment:
+                      [SRR6212872, SRR6212873]
+                  control:
+                      [SRR5111896, SRR5111897]
+                  source: GEO
+                  control_type: Input
+                  SOFA: protein_binding_site
+                  keep_duplicates: False
+                  PMID: 22955616
+                  DOI: 10.1038/nature11247
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
@@ -974,6 +1151,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -993,6 +1172,8 @@ experiment:
                   control_type: Input
                   SOFA: protein_binding_site
                   keep_duplicates: False
+                  PMID: 22955616
+                  DOI: 10.1038/nature11247
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
@@ -1009,6 +1190,8 @@ experiment:
                   control_type: Input
                   SOFA: protein_binding_site
                   keep_duplicates: False
+                  PMID: 22955616
+                  DOI: 10.1038/nature11247
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
@@ -1025,6 +1208,8 @@ experiment:
                   source: GEO
                   SOFA: protein_binding_site
                   keep_duplicates: False
+                  PMID: 22955616
+                  DOI: 10.1038/nature11247
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
@@ -1042,6 +1227,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1058,6 +1245,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300, 1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1074,6 +1263,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1090,6 +1281,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1106,6 +1299,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1122,6 +1317,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1138,6 +1335,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1154,6 +1353,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1170,6 +1371,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1186,6 +1389,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1203,6 +1408,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1220,8 +1427,11 @@ experiment:
                     control_type: Input
                     SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
+                    PMID: 29970451
+                    DOI: 10.1101/gr.234229.118
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
@@ -1253,8 +1463,11 @@ experiment:
                     control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
+                    PMID: 29970451
+                    DOI: 10.1101/gr.234229.118
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
@@ -1274,6 +1487,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1292,8 +1507,11 @@ experiment:
                     control_type: IgG
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: True
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000, 5000, 20000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
@@ -1308,8 +1526,11 @@ experiment:
                     control_type: IgG
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000, 5000, 20000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
@@ -1325,6 +1546,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: True
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1341,6 +1564,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1356,6 +1581,8 @@ experiment:
                         [SRR2085882, SRR2085883, SRR2085884, SRR2085885, SRR2085886]
                     source: GEO
                     control_type: IgG
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: True
                     hiddendomain_width: [1000]
@@ -1373,6 +1600,8 @@ experiment:
                         [SRR2085862, SRR2085863, SRR2085864]
                     source: GEO
                     control_type: IgG
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
                     hiddendomain_width: [1000]
@@ -1393,6 +1622,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: True
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1409,6 +1640,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K36_trimethylation_site
                     keep_duplicates: False
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1426,6 +1659,8 @@ experiment:
                     control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: True
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1442,6 +1677,8 @@ experiment:
                     control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1459,6 +1696,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: True
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1476,6 +1715,8 @@ experiment:
                     control_type: IgG
                     SOFA: H3K4_trimethylation_site
                     keep_duplicates: True
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1494,6 +1735,8 @@ experiment:
                     control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: True
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1510,6 +1753,8 @@ experiment:
                     control_type: IgG
                     SOFA: protein_binding_site
                     keep_duplicates: True
+                    PMID: 26280331
+                    DOI: 10.1038/nmeth.3542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1529,6 +1774,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K4_monomethylation_site
                     keep_duplicates: False
+                    PMID: 27089178
+                    DOI: 10.1038/ng.3550
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1546,6 +1793,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K27_acetylation_site
                     keep_duplicates: False
+                    PMID: 27089178
+                    DOI: 10.1038/ng.3550
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1563,6 +1812,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K122_acetylation_site
                     keep_duplicates: False
+                    PMID: 27089178
+                    DOI: 10.1038/ng.3550
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1581,6 +1832,8 @@ experiment:
                     control_type: Input
                     SOFA: histone_modification
                     keep_duplicates: False
+                    PMID: 22391447
+                    DOI: 10.1101/gad.179416.111
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1599,6 +1852,8 @@ experiment:
                     input_type: IgG
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    PMID: 23754963
+                    DOI: 10.1371/journal.pgen.1003542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1616,6 +1871,8 @@ experiment:
                     input_type: Input
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    PMID: 23754963
+                    DOI: 10.1371/journal.pgen.1003542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1632,6 +1889,8 @@ experiment:
                     input_type: Input
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    PMID: 23754963
+                    DOI: 10.1371/journal.pgen.1003542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1648,6 +1907,8 @@ experiment:
                     input_type: Input
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    PMID: 23754963
+                    DOI: 10.1371/journal.pgen.1003542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1664,6 +1925,8 @@ experiment:
                     input_type: Input
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    PMID: 23754963
+                    DOI: 10.1371/journal.pgen.1003542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1680,6 +1943,8 @@ experiment:
                     input_type: Input
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    PMID: 23754963
+                    DOI: 10.1371/journal.pgen.1003542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1696,6 +1961,8 @@ experiment:
                     input_type: Input
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    PMID: 23754963
+                    DOI: 10.1371/journal.pgen.1003542
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1714,6 +1981,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1731,6 +2000,8 @@ experiment:
                     control_type: Input
                     SOFA: protein_binding_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1748,6 +2019,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K79_dimethylation_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1755,20 +2028,23 @@ experiment:
                     digestion: 'sonication'
                     is_paired: False
                     comment: '1 replicate has really low read depth'
-            # H4K20me1:
-            #     ENCSR000AKX:
-            #         treatment:
-            #             [SRR227427, SRR227428]
-            #         control:
-            #             [SRR227650, SRR5331211, SRR5331212, SRR5331213]
-            #         source: GEO
-            #         SOFA: H3K20_monomethylation_site
-            #         keep_duplicates: False
-            #         hiddendomain_width: [1000]
-            #         aligner: bowtie2
-            #         track_bs: [1000]
-            #         digestion: 'sonication'
-            #         is_paired: False
+            H4K20me1:
+                ENCSR000AKX:
+                    treatment:
+                        [SRR227427, SRR227428]
+                    control:
+                        [SRR227650, SRR5331211, SRR5331212, SRR5331213]
+                    source: GEO
+                    SOFA: H3K20_monomethylation_site
+                    keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: 'sonication'
+                    is_paired: False
             H3K9me3:
                 ENCSR000APE:
                     treatment:
@@ -1779,12 +2055,16 @@ experiment:
                     control_type: Input
                     SOFA: H3K9_trimethylation_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
+                    antibody: 'ab8898'
                     comment: "1 replicate has really low read depth"
         Bernstein2011:
             # H3K27me3:
@@ -1811,6 +2091,8 @@ experiment:
                     control_type: Input
                     SOFA: H3K27_trimethylation_site
                     keep_duplicates: False
+                    PMID: 22955616
+                    DOI: 10.1038/nature11247
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1849,6 +2131,8 @@ experiment:
                     control_type: Input
                     SOFA: H4K5_acetylation_K8_acetylation_site
                     keep_duplicates: False
+                    PMID: 30503705
+                    DOI: 10.1016/j.ccell.2018.11.001
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
@@ -1900,6 +2184,7 @@ experiment:
                     source: local
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
+                    hmmr: [5000]
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]
                     digestion: 'sonication'
@@ -1960,6 +2245,7 @@ experiment:
                     keep_duplicates: False
                     source: local
                     hiddendomain_width: [1000]
+                    hmmr: [5000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
                     track_bs: [1000, 5000, 20000]

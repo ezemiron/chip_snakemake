@@ -12,6 +12,7 @@ def get_all(config):
     regex_bw = '%s/%s/tracks/%s/%s/%ikb/%s_%s_r%i_%s_fcoc.bw'
     regex_target_bw = '%s/%s/tracks/%s/%s/%ikb/%s_fcoc.bw'
     regex_sample_bw = '%s/%s/tracks/%s/%s/%ikb/%s_%s_fcoc.bw'
+    regex_hmm = '%s/%s/hmm/%s/%s/%ikb/%s_%s.txt'
     regex_idx = '%s/%s/idxstats/%s/%s/%s_%s.txt'
     regex_np = '%s/%s/gff3/%s/%s/%s_%s_r%i_%s_%s.gff3'
 
@@ -50,6 +51,12 @@ def get_all(config):
                                   for w in width]
                         # domain.append('narrowPeak')
                         rep_list = info_dict['treatment']
+                        if 'hmmr' in info_dict:
+                            for bs in info_dict['hmmr']:
+                                kb = bs / 1000
+                                yield(regex_hmm % (config['chip_out'], genome,
+                                                   celltype, experiment, kb,
+                                                   target, sample))
 
                         if len(rep_list) > 1:
                             if 'track_bs' in info_dict:
@@ -109,7 +116,16 @@ rule plot_correlation:
         "                -p scatterplot"
 
 
-
+rule hmmr:
+    input:
+        '{outdir}/tracks/{dir_name}_fcoc.bw'
+    output:
+        txt='{outdir}/hmm/{dir_name}.txt',
+        gff='{outdir}/hmm/{dir_name}.gff3'
+    shell:
+        "{chip_path}/scripts/hmmr_domains.R --bw {input}"
+        "                                   --gff {output.gff}"
+        "                                   > {output.txt}"
 
 
 
@@ -184,17 +200,18 @@ rule compare_target:
         "                        -out {output[0]}"
         "                        --outRawCounts {output[1]}"
 
-def get_compare_bw_rep(config, wildcards):
+
+def get_compare_rep_bw(config, wildcards):
     exp_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
     rep_list = exp_dict[wildcards.target][wildcards.sample]['treatment']
     for rep in range(0, len(rep_list)):
-        yield('%s/tracks/%s/%s/%s/%s_%s_r%i_%s_fcoc.bw' % (wildcards.outdir,
-                                                           wildcards.celltype,
-                                                           wildcards.experiment,
-                                                           wildcards.kb,
-                                                           wildcards.target,
-                                                           wildcards.sample,
-                                                           rep+1, rep_list[rep]))
+        yield('%s/coverage/%s/%s/%skb/%s_%s_r%i_%s.bw' % (wildcards.outdir,
+                                                          wildcards.celltype,
+                                                          wildcards.experiment,
+                                                          wildcards.bs,
+                                                          wildcards.target,
+                                                          wildcards.sample,
+                                                          rep+1, rep_list[rep]))
 
 
 rule make_compare_bw:
@@ -214,12 +231,52 @@ rule make_compare_bw:
         "                                          -bw {output}"
 
 
+def get_label(file_iter, add=['Input'], prefix='exp'):
+    iter_list = [prefix for f in file_iter]
+    for i in range(0, len(iter_list)):
+        iter_list[i] = ''.join(iter_list)
+    iter_list.extend(add)
+    return(iter_list)
+
+
+def get_input_name(config, celltype, experiment, target, sample):
+    exp_dict = config['experiment'][celltype][experiment]
+    srr_id = '_'.join(exp_dict[target][sample]['control'])
+    return(srr_id)
+
+
+
+def get_input_bw(config, wildcards):
+    srr_id = get_input_name(config, wildcards.celltype, wildcards.experiment,
+                            wildcards.target, wildcards.sample)
+    if 'genome' in wildcards.keys():
+        return('%s/%s/coverage/control/%skb/%s.bw' % (wildcards.outdir,
+                                                      wildcards.genome,
+                                                      wildcards.bs, srr_id))
+    else:
+        return('%s/coverage/control/%skb/%s.bw' % (wildcards.outdir,
+                                                   wildcards.bs, srr_id))
+
+
+def get_input_bam(config, wildcards):
+    srr_id = get_input_name(config, wildcards.celltype, wildcards.experiment,
+                            wildcards.target, wildcards.sample)
+    bam = '%s/%s/filtered/control/%s.bam' % (wildcards.outdir,
+                                             wildcards.genome, srr_id)
+    return([bam, ''.join([bam, '.bai'])])
+
+
+
 rule compare_bw_rep:
     input:
-        lambda wildcards: get_compare_bw_rep(config, wildcards)
+        signal=lambda wildcards: get_compare_rep_bw(config, wildcards),
+        input=lambda wildcards: get_input_bw(config, wildcards)
     output:
-        '{outdir}/stats/{celltype}/{experiment}/{kb}/{target}_{sample}.npz',
-        '{outdir}/stats/{celltype}/{experiment}/{kb}/{target}_{sample}.txt'
+        '{outdir}/stats/{celltype}/{experiment}/{bs}kb/{target}_{sample}.npz',
+        '{outdir}/stats/{celltype}/{experiment}/{bs}kb/{target}_{sample}.txt'
+    params:
+        label=lambda wildcards: get_label(get_compare_rep_bw(config, wildcards)),
+        bs="{bs}"
     threads:
         10
     wildcard_constraints:
@@ -227,15 +284,18 @@ rule compare_bw_rep:
         sample="[^_]+",
         celltype='[^/]+',
         experiment='[^/]+',
-        kb='[0-9]+kb'
-    shell:
-        "multiBigwigSummary bins --bwfiles {input}"
-        "                        -p {threads}"
-        "                        -out {output[0]}"
-        "                        --outRawCounts {output[1]}"
+        bs='[0-9.]+'
+    run:
+        binsize = int(float(params.bs) * 1000)
+        shell("multiBigwigSummary bins --bwfiles {input.signal} {input.input}"
+              "                        --label {params.label}"
+              "                        -p {threads}"
+              "                        -bs {binsize}"
+              "                        -out {output[0]}"
+              "                        --outRawCounts {output[1]}")
 
 
-def get_compare_input(config, wildcards):
+def get_compare_bam(config, wildcards):
     exp_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
     rep_list = exp_dict[wildcards.target][wildcards.sample]['treatment']
     for rep in range(0, len(rep_list)):
@@ -248,9 +308,9 @@ def get_compare_input(config, wildcards):
 
 rule compare_bam_replicates:
     input:
-        bam=lambda wildcards: get_compare_input(config, wildcards),
+        bam=lambda wildcards: get_compare_bam(config, wildcards),
         bai=lambda wildcards: [''.join((name, '.bai')) for name in
-                               get_compare_input(config, wildcards)]
+                               get_compare_bam(config, wildcards)]
     output:
         '{outdir}/stats/{celltype}/{experiment}/{target}_{sample}.npz'
     threads:
@@ -273,12 +333,16 @@ def get_exp(config, wildcards):
                                                          wildcards.target,
                                                          wildcards.sample,
                                                          r + 1, rep_list[r]))
+
+
+
 def get_ctrl_input(config, wildcards):
     ip_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
     srr_list = ip_dict[wildcards.target][wildcards.sample]['control']
     srr_str = '_'.join(srr_list)
     return('%s/%s/filtered/control/%s.bam' % (wildcards.outdir, wildcards.genome,
                                               srr_str))
+
 
 
 rule idxstats:
@@ -399,7 +463,7 @@ rule call_domains:
     input:
         bam='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam',
         bai='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam.bai',
-        ctrl=lambda wildcards: get_compare_ctrl(config, wildcards),
+        ctrl=lambda wildcards: get_input_bam(config, wildcards),
         g='{outdir}/{genome}/chrom_sizes.txt'
     output:
         '{outdir}/{genome}/domains/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}_{bs}_{p}_analysis.bed'
@@ -418,7 +482,7 @@ rule call_peaks:
     input:
         bam='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam',
         bai='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam.bai',
-        ctrl=lambda wildcards: get_compare_ctrl(config, wildcards)
+        ctrl=lambda wildcards: get_input_bw(config, wildcards)
     output:
         '{outdir}/{genome}/peaks/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}_peaks.narrowPeak'
     params:
@@ -433,33 +497,30 @@ rule call_peaks:
 
 
 
-def get_compare_ctrl(config, wildcards):
-    rep = int(wildcards.rep.replace('r', '')) - 1
-    exp_dict = config['experiment'][wildcards.celltype][wildcards.experiment]
-    srr_id = '_'.join(exp_dict[wildcards.target][wildcards.sample]['control'])
-    return('%s/%s/coverage/control/%skb/%s.bw' % (wildcards.outdir,
-                                                   wildcards.genome,
-                                                   wildcards.bs, srr_id))
+
 
 
 
 rule bamcompare:
     input:
         bw='{outdir}/{genome}/coverage/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}.bw',
-        ctrl=lambda wildcards: get_compare_ctrl(config, wildcards)
+        ctrl=lambda wildcards: get_input_bw(config, wildcards)
     output:
         temp('{outdir}/{genome}/stats/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}.npz'),
         '{outdir}/{genome}/stats/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}.txt'
     log:
         '{outdir}/{genome}/log/tracks/{celltype}/{experiment}/{bs}kb/{target}_{sample}_{rep}_{srr_id}_fcoc.log'
     params:
+        labels = '{target}_{sample}_{rep}_{srr_id}',
         min_mapq = config['min_mapq'],
         binsize = lambda wildcards: int(float(wildcards.bs) * 1000)
     threads:
         10
     shell:
-        "multiBigwigSummary bins --bwfiles {input}"
+        "multiBigwigSummary bins --bwfiles {input.bw} {input.ctrl}"
+        "                        --labels {params.labels} Input"
         "                        -p {threads}"
+        "                        -bs {params.binsize}"
         "                        -out {output[0]}"
         "                        --outRawCounts {output[1]} > {log} 2>&1"
         #
@@ -506,11 +567,11 @@ rule bw_coverage:
     threads:
         20
     shell:
-        "scripts/sambambaToBw.sh -t {threads}"
-        "                        -b {input.bam}"
-        "                        -o {output}"
-        "                        -w {params.binsize}"
-        "                        -c {input.chromsize}"
+        "{chip_path}/scripts/sambambaToBw.sh -t {threads}"
+        "                                    -b {input.bam}"
+        "                                    -o {output}"
+        "                                    -w {params.binsize}"
+        "                                    -c {input.chromsize}"
 
 
 
