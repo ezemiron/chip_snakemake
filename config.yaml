@@ -265,6 +265,26 @@ experiment:
                     digestion: sonication
                     is_paired: False
     Hap1:
+        Haarhuis2017:
+            CTCF:
+                GSM2493878:
+                    treatment:
+                        [SRR5266526]
+                    control:
+                        [SRR5266522]
+                    source: GEO
+                    control_type: Input
+                    SOFA: CTCF_site
+                    keep_duplicates: False
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    PMID: 28475897
+                    DOI: 10.1016/j.cell.2017.04.013
+                    aligner: bowtie2
+                    track_bs: [1000]
+                    digestion: sonication
+                    is_paired: False
+                    antibody: "Millipore 07-729"
         Schick2019:
             H3K4me1:
                 GSM2897163-4:
@@ -606,7 +626,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     antibody: "Abcam ab8895, Lot GR305231-1, anti-H3K4me1"
                     digestion: sonication
                     is_paired: True
@@ -625,7 +645,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     antibody: "Cell Signaling Technologies 5326 BF, Lot 2, anti-H3K4me1"
                     digestion: sonication
                     is_paired: True
@@ -644,7 +664,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     antibody: "Thermo Fisher 710795, Lot QL230605, anti-H3K4me1"
                     digestion: sonication
                     is_paired: True
@@ -664,7 +684,7 @@ experiment:
                     PMID: 30244833
                     DOI: 10.1016/j.molcel.2018.08.015
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     antibody: "Thermo Fisher 710796, Lot QL230606, anti-H3K4me2"
                     digestion: sonication
                     is_paired: True
@@ -677,7 +697,7 @@ experiment:
                     source: GEO
                     control_type: Input
                     SOFA: H3K4_dimethylation_site
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     keep_duplicates: False
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
@@ -703,7 +723,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     antibody: "Abcam ab12209, Lot GR275790-1, anti-H3K4me3"
                     digestion: sonication
                     is_paired: True
@@ -722,7 +742,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     antibody: "Abclonal A2357, Vial 46698, anti-H3K4me3"
                     digestion: sonication
                     is_paired: True
@@ -741,7 +761,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     antibody: "EMD Millipore 05-745R, Lot 2813867, anti-H3K4me3"
                     digestion: sonication
                     is_paired: True
@@ -760,7 +780,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     antibody: "Thermo Fisher PA5-40086, Lot SC2349865, anti-H3K4me3"
                     digestion: sonication
                     is_paired: True
@@ -781,7 +801,7 @@ experiment:
                     hiddendomain_p: 0.9
                     hmmr: [5000]
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     antibody: "Koide Lab 309M3B recombinant anti-H3K9me3.3"
                     digestion: sonication
                     is_paired: True
@@ -801,7 +821,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: MNase
                     is_paired: False
         vdBoom2016:
@@ -820,7 +840,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: unknown
                     is_paired: False
             H3K27me3:
@@ -838,7 +858,7 @@ experiment:
                     hiddendomain_width: [1000, 20000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     hmmr: [5000]
                     digestion: unknown
                     is_paired: False
@@ -858,7 +878,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: unknown
                     is_paired: False
             PCGF1-GFP:
@@ -876,7 +896,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: unknown
                     is_paired: False
             BMI1-GFP:
@@ -894,7 +914,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: unknown
                     is_paired: False
             RINGB1:
@@ -912,7 +932,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: unknown
                     is_paired: False
             RINGA1:
@@ -930,7 +950,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: unknown
                     is_paired: False
             MEL18-GFP:
@@ -948,7 +968,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: unknown
                     is_paired: False
         Salzberg2017:
@@ -969,7 +989,7 @@ experiment:
                     hiddendomain_p: 0.9
                     hmmr: [5000]
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     digestion: MNase
                     antibody: 'ab1220 Abcam'
                     is_paired: False
@@ -990,7 +1010,7 @@ experiment:
                     hiddendomain_p: 0.9
                     hmmr: [5000]
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     digestion: MNase
                     antibody: 'ab8898 Abcam'
                     is_paired: False
@@ -1010,7 +1030,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             # CCNT2:
@@ -1024,7 +1044,7 @@ experiment:
             #         keep_duplicates: False
             #         hiddendomain_width: [300]
             #         aligner: bowtie2
-            #         track_bs: [1000]
+            #         track_bs: [1000, 2000]
             #         digestion: 'sonication'
             #         is_paired: False
         # Farnham2011:
@@ -1039,7 +1059,7 @@ experiment:
         #             keep_duplicates: False
         #             hiddendomain_width: [1000]
         #             aligner: bowtie2
-        #             track_bs: [1000]
+        #             track_bs: [1000, 2000]
         #             digestion: 'sonication'
         #             is_paired: False
         Snyder2016:
@@ -1058,7 +1078,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: True
                     comment: "Don't know which exact antibody was used, only
@@ -1077,7 +1097,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: True
                     comment: "Don't know which exact antibody was used, only
@@ -1097,7 +1117,7 @@ experiment:
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
-                  track_bs: [1000]
+                  track_bs: [1000, 2000]
                   digestion: 'sonication'
                   is_paired: True
             LARP7:
@@ -1115,7 +1135,7 @@ experiment:
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
-                  track_bs: [1000]
+                  track_bs: [1000, 2000]
                   digestion: 'sonication'
                   is_paired: True
             BRCA1:
@@ -1133,7 +1153,7 @@ experiment:
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
-                  track_bs: [1000]
+                  track_bs: [1000, 2000]
                   digestion: 'sonication'
                   is_paired: True
         Snyder2017:
@@ -1156,7 +1176,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: True
                     comment: "Secondary characterization with IP-MS failed with no
@@ -1177,7 +1197,7 @@ experiment:
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
-                  track_bs: [1000]
+                  track_bs: [1000, 2000]
                   digestion: 'sonication'
                   is_paired: True
             HDAC2:
@@ -1195,7 +1215,7 @@ experiment:
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
-                  track_bs: [1000]
+                  track_bs: [1000, 2000]
                   digestion: 'sonication'
                   is_paired: True
         Snyder2018:
@@ -1213,7 +1233,7 @@ experiment:
                   hiddendomain_width: [1000]
                   hiddendomain_p: 0.9
                   aligner: bowtie2
-                  track_bs: [1000]
+                  track_bs: [1000, 2000]
                   digestion: 'sonication'
                   is_paired: True
         Snyder2012:
@@ -1232,7 +1252,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             MYC:
@@ -1250,7 +1270,7 @@ experiment:
                     hiddendomain_width: [300, 1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             SMC3:
@@ -1268,7 +1288,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             RCOR1:
@@ -1286,7 +1306,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             Znf143:
@@ -1304,7 +1324,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             ELK1:
@@ -1322,7 +1342,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             MAX:
@@ -1340,7 +1360,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             MAZ:
@@ -1358,7 +1378,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             ARID3A:
@@ -1376,7 +1396,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             GTF2F1:
@@ -1394,7 +1414,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
         Myers2011:
@@ -1413,7 +1433,7 @@ experiment:
                     hiddendomain_width: [300]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
         Liu2018:
@@ -1427,13 +1447,13 @@ experiment:
                     control_type: Input
                     SOFA: H3K9_dimethylation_site
                     keep_duplicates: False
-                    PMID: 29970451
-                    DOI: 10.1101/gr.234229.118
+                    PMID: 29211708
+                    DOI: 10.1038/nature25179
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     hmmr: [5000]
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "GEO annotation was ambiguous for 1 other experiment
@@ -1451,7 +1471,7 @@ experiment:
                 #     keep_duplicates: False
                 #     hiddendomain_width: [1000]
                 #     aligner: bowtie2
-                #     track_bs: [1000]
+                #     track_bs: [1000, 2000]
                 #     digestion: 'sonication'
                 #     is_paired: False
                 ab8898:
@@ -1469,7 +1489,7 @@ experiment:
                     hiddendomain_p: 0.9
                     hmmr: [5000]
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "GEO annotation was ambiguous for 1 other experiment
@@ -1492,7 +1512,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: 'read depth is low'
@@ -1513,7 +1533,7 @@ experiment:
                     hiddendomain_p: 0.9
                     hmmr: [5000]
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Millipore 07-449"
@@ -1532,7 +1552,7 @@ experiment:
                     hiddendomain_p: 0.9
                     hmmr: [5000]
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Millipore 07-449"
@@ -1551,7 +1571,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Diagenode pAb-196-050"
@@ -1569,7 +1589,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Diagenode pAb-196-050"
@@ -1588,7 +1608,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Diagenode pAb-194-050"
@@ -1607,7 +1627,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Diagenode pAb-194-050"
@@ -1627,7 +1647,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: 'Diagenode pAb-192-050'
@@ -1645,7 +1665,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: 'Diagenode pAb-192-050'
@@ -1664,7 +1684,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Santa Cruz sc-352"
@@ -1682,7 +1702,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Santa Cruz sc-352"
@@ -1701,7 +1721,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Diagenode C15410003-50"
@@ -1720,7 +1740,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Diagenode C15410003-50"
@@ -1740,7 +1760,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Millipore 07-729"
@@ -1758,7 +1778,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: "Millipore 07-729"
@@ -1779,7 +1799,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'Mnase'
                     is_paired: False
                     comment: "just a single replicate, but looks really good. Ab no off-target according to Shah et al."
@@ -1798,7 +1818,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'Mnase'
                     is_paired: False
                     comment: "just a single replicate, but looks really good."
@@ -1817,7 +1837,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'Mnase'
                     is_paired: False
                     comment: "just a single replicate, but looks really good."
@@ -1837,7 +1857,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'Mnase'
                     is_paired: False
                     comment: "treated with luciferase shRNA (used for control)"
@@ -1857,7 +1877,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "read depth is very low"
@@ -1876,7 +1896,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             H3K79me2-S:
@@ -1894,7 +1914,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             H3K79me2-G2:
@@ -1912,7 +1932,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             H3K4me3-G1:
@@ -1930,7 +1950,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             H3K4me3-S:
@@ -1948,7 +1968,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             H3K4me3-G2:
@@ -1966,7 +1986,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
 
@@ -1986,7 +2006,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
         Bernstein2012:
@@ -2005,7 +2025,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: '1 replicate has really low read depth'
@@ -2024,7 +2044,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: '1 replicate has really low read depth'
@@ -2042,7 +2062,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
             H3K9me3:
@@ -2061,7 +2081,7 @@ experiment:
                     hiddendomain_p: 0.9
                     hmmr: [5000]
                     aligner: bowtie2
-                    track_bs: [1000, 5000, 20000]
+                    track_bs: [1000, 2000, 5000, 20000]
                     digestion: 'sonication'
                     is_paired: False
                     antibody: 'ab8898'
@@ -2078,7 +2098,7 @@ experiment:
             #         keep_duplicates: False
             #         hiddendomain_width: [1000]
             #         aligner: bowtie2
-            #         track_bs: [1000]
+            #         track_bs: [1000, 2000]
             #         digestion: 'sonication'
             #         is_paired: False
             H2AFZ:
@@ -2096,7 +2116,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
                     comment: "other chip-seq data in this series has mixed
@@ -2117,7 +2137,7 @@ experiment:
             #         keep_duplicates: False
             #         hiddendomain_width: [1000]
             #         aligner: bowtie2
-            # track_bs: [1000]
+            # track_bs: [1000, 2000]
             #         digestion: 'sonication'
             #         is_paired: False
         Minoda2018:
@@ -2136,7 +2156,7 @@ experiment:
                     hiddendomain_width: [1000]
                     hiddendomain_p: 0.9
                     aligner: bowtie2
-                    track_bs: [1000]
+                    track_bs: [1000, 2000]
                     digestion: 'sonication'
                     is_paired: False
     HRPEpiC:

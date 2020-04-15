@@ -49,7 +49,8 @@ def get_all(config):
                         p = info_dict['hiddendomain_p']
                         domain = ['-'.join(('domains',str(w), str(p)))
                                   for w in width]
-                        # domain.append('narrowPeak')
+                        if target=='CTCF':
+                            domain.append('narrowPeak')
                         rep_list = info_dict['treatment']
                         if 'hmmr' in info_dict:
                             for bs in info_dict['hmmr']:
@@ -246,16 +247,24 @@ def get_input_name(config, celltype, experiment, target, sample):
 
 
 
-def get_input_bw(config, wildcards):
+def get_input_bw(config, wildcards, bam=False):
     srr_id = get_input_name(config, wildcards.celltype, wildcards.experiment,
                             wildcards.target, wildcards.sample)
+
     if 'genome' in wildcards.keys():
-        return('%s/%s/coverage/control/%skb/%s.bw' % (wildcards.outdir,
-                                                      wildcards.genome,
-                                                      wildcards.bs, srr_id))
+        if bam is True:
+            pat_list = ['{outdir}/{genome}/filtered/control/{srr}.bam',
+                        '{outdir}/{genome}/filtered/control/{srr}.bam.bai']
+        else:
+            pat_list = ['{outdir}/{genome}/coverage/control/{bs}kb/{srr}.bw']
     else:
-        return('%s/coverage/control/%skb/%s.bw' % (wildcards.outdir,
-                                                   wildcards.bs, srr_id))
+        if bam is True:
+            pat_list = ['{outdir}/filtered/control/{srr}.bam',
+                        '{outdir}/filtered/control/{srr}.bam.bai']
+        else:
+            pat_list = ['{outdir}/coverage/control/{bs}kb/{srr}.bw']
+    for pat in pat_list:
+        yield(pat.format(srr=srr_id, **wildcards))
 
 
 def get_input_bam(config, wildcards):
@@ -463,7 +472,7 @@ rule call_domains:
     input:
         bam='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam',
         bai='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam.bai',
-        ctrl=lambda wildcards: get_input_bam(config, wildcards),
+        ctrl=lambda wildcards: get_input_bw(config, wildcards, bam=True),
         g='{outdir}/{genome}/chrom_sizes.txt'
     output:
         '{outdir}/{genome}/domains/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}_{bs}_{p}_analysis.bed'
@@ -482,7 +491,7 @@ rule call_peaks:
     input:
         bam='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam',
         bai='{outdir}/{genome}/filtered/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}.bam.bai',
-        ctrl=lambda wildcards: get_input_bw(config, wildcards)
+        ctrl=lambda wildcards: get_input_bw(config, wildcards, bam=True)
     output:
         '{outdir}/{genome}/peaks/{celltype}/{experiment}/{target}_{sample}_{rep}_{srr_id}_peaks.narrowPeak'
     params:
