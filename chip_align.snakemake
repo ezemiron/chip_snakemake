@@ -1,12 +1,17 @@
 import os
 import inspect
 import glob
+import yaml
 
 
 filename = inspect.getframeinfo(inspect.currentframe()).filename
 chip_path = os.path.dirname(os.path.abspath(filename))
+#
+# configfile: "%s/config.yaml" % (chip_path)
 
-configfile: "%s/config.yaml" % (chip_path)
+
+with open("%s/config.yaml" % (chip_path)) as c:
+    config.update(yaml.load(c))
 
 def get_all(config):
     regex_bw = '%s/%s/tracks/%s/%s/%ikb/%s_%s_r%i_%s_fcoc.bw'

@@ -355,11 +355,26 @@ def get_mean_bed(config, wildcards):
     else:
         return(config['bed_summary'][wildcards.bed])
 
+def get_chip_track(config, wildcards, chip_path):
+    bed_split = wildcards.bed.split('-')
+    if bed_split[-1].isdigit():
+        bs = int(bed_split[-1])
+    else:
+        bs = config['binsize']
+    pattern = ('{chip_path}/{genome}/tracks/{celltype}/{experiment}/{kb}kb/'
+               '{target}_{sample}_fcoc.bw')
+    bw = pattern.format(chip_path=chip_path, genome=config['genome'],
+                        celltype=config['celltype'], kb=int(bs/1000),
+                        **wildcards)
+    return(bw)
+
+
 rule means:
     input:
         bed=lambda wildcards: get_mean_bed(config, wildcards),
         exp=lambda wildcards: get_exp(config, wildcards),
         ip=lambda wildcards: get_ctrl_input(config, wildcards),
+        bw=lambda wildcards: get_chip_track(config, wildcards, chip_path),
         counts='{outdir}/chip_counts/{bed}_{experiment}_{target}_{sample}.txt'
     output:
         '{outdir}/{type}_means/{bed}_{experiment}_{target}_{sample}.txt'
@@ -367,6 +382,7 @@ rule means:
         input_exp = ','.join(input.exp)
         shell("{chip_path}/scripts/compute_means.R --exp {input_exp} "
               "                                    --bed {input.bed}"
+              "                                    --bw {input.bw}"
               "                                    --counts {input.counts}"
               "                                    --input {input.ip} > {output}")
 

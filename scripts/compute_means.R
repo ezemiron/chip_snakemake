@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 
 library(argparse)
+suppressMessages(suppressWarnings(require(rtracklayer)))
 
 parser <- ArgumentParser(description='Process counts into normalized mean and geometric means')
 
@@ -8,6 +9,7 @@ parser$add_argument('--exp', help='bam files of samples for calculating coverage
 parser$add_argument('--counts', help='count file with counts in region')
 parser$add_argument('--input', help='bam file with input for calculating coverage')
 parser$add_argument('--bed', help='bed file with regions of interest')
+parser$add_argument('--bw', help='bigwig file with binned genome track')
 
 argv <- parser$parse_args()
 
@@ -66,5 +68,11 @@ mean_table = data.frame(ID=rownames(bed_table),
                         mean=mean_vec[match_vec],
                         log2_mean=log_mean_vec[match_vec],
                         gm_mean=gm_mean_vec[match_vec])
+
+track_gr = import.bw(argv$bw)
+mean_track = mean(track_gr$score)
+sd_track = sd(track_gr$score)
+
+mean_table$z_score = (mean_table$log2_mean - mean_track) / sd_track
 
 write.table(mean_table, quote=F, sep='\t', row.names=F)
