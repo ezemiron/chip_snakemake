@@ -183,26 +183,28 @@ rule nearestPeak:
         "{chip_path}/scripts/compute_nearest.R {input.bed} {input.peaks} "
         "    > {output}"
 
-rule multiWigSummary:
-    input:
-        bed=lambda wildcards: config['bed_summary'][wildcards.bed],
-        bw=lambda wildcards: ['%s/%s' % (config['encode_dir'], bw)
-                              for bw in get_encode_input(config)],
-    params:
-        label=get_encode_label(config)
-    output:
-        '{outdir}/encode_means/{bed}.npz',
-        '{outdir}/encode_means/{bed}.txt'
-    threads:
-        5
-    shell:
-        "multiBigwigSummary BED-file -p {threads}"
-        "                            --BED {input.bed}"
-        "                            -l {params.label}"
-        "                            -b {input.bw}"
-        "                            -out {output[0]}"
-        "                            --outRawCounts {output[1]}"
+if config['use_encode_tracks']:
+    rule multiWigSummary:
+        input:
+            bed=lambda wildcards: config['bed_summary'][wildcards.bed],
+            bw=lambda wildcards: ['%s/%s' % (config['encode_dir'], bw)
+                                  for bw in get_encode_input(config)],
+        params:
+            label=get_encode_label(config)
+        output:
+            '{outdir}/encode_means/{bed}.npz',
+            '{outdir}/encode_means/{bed}.txt'
+        threads:
+            5
+        shell:
+            "multiBigwigSummary BED-file -p {threads}"
+            "                            --BED {input.bed}"
+            "                            -l {params.label}"
+            "                            -b {input.bw}"
+            "                            -out {output[0]}"
+            "                            --outRawCounts {output[1]}"
 
+    ruleorder: multiWigSummary > means
 
 def get_encode_bw(config, wildcards):
     file_list = get_encode_input(config)
@@ -258,7 +260,7 @@ def get_bw(config, wildcards):
 
 
 ruleorder: domain_means > means
-ruleorder: multiWigSummary > means
+
 
 rule compute_matrix:
     input:

@@ -785,26 +785,26 @@ experiment:
                     digestion: sonication
                     is_paired: True
                     comment: "~0% off-target for H3K4me1/me2"
-            H3K9me3:
-                GSM3228107:
-                    treatment:
-                        [SRR7441421]
-                    control:
-                        [SRR7441422]
-                    source: GEO
-                    control_type: Input
-                    SOFA: H3K9_trimethylation_site
-                    keep_duplicates: False
-                    PMID: 30244833
-                    DOI: 10.1016/j.molcel.2018.08.015
-                    hiddendomain_width: [1000]
-                    hiddendomain_p: 0.9
-                    hmmr: [5000]
-                    aligner: bowtie2
-                    track_bs: [1000, 2000, 5000, 20000]
-                    antibody: "Koide Lab 309M3B recombinant anti-H3K9me3.3"
-                    digestion: sonication
-                    is_paired: True
+            # H3K9me3:
+            #     GSM3228107:
+            #         treatment:
+            #             [SRR7441421]
+            #         control:
+            #             [SRR7441422]
+            #         source: GEO
+            #         control_type: Input
+            #         SOFA: H3K9_trimethylation_site
+            #         keep_duplicates: False
+            #         PMID: 30244833
+            #         DOI: 10.1016/j.molcel.2018.08.015
+            #         hiddendomain_width: [1000]
+            #         hiddendomain_p: 0.9
+            #         hmmr: [5000]
+            #         aligner: bowtie2
+            #         track_bs: [1000, 2000, 5000, 20000]
+            #         antibody: "Koide Lab 309M3B recombinant anti-H3K9me3.3"
+            #         digestion: sonication
+            #         is_paired: True
         Tyler2017:
             BRD4:
                 GSE88747:
