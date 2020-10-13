@@ -1,0 +1,165 @@
+chip_out:
+    /DATA/usr/c.leemans/projects/chip_snake
+
+
+experiment:
+    Hap1:
+        E.Miron:
+            ParR:
+                parMR-parR.Unt-input:
+                    treatment:
+                        [parMR-parR]
+                    control:
+                        [Unt-input]
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    source: local
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [100, 1000, 10000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    control_type: Input
+                parR-parR.Unt-input:
+                    treatment:
+                        [parR-parR]
+                    control:
+                        [Unt-input]
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    source: local
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [100, 1000, 10000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    control_type: Input
+                Unt-parR.Unt-input:
+                    treatment:
+                        [Unt-parR]
+                    control:
+                        [Unt-input]
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    source: local
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [100, 1000, 10000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    control_type: Input
+                parMR-parR.parMR-IgG:
+                    treatment:
+                        [parMR-parR]
+                    control:
+                        [parMR-IgG]
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    source: local
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [100, 1000, 10000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    control_type: IgG
+                parR-parR.parR-IgG:
+                    treatment:
+                        [parR-parR]
+                    control:
+                        [parR-IgG]
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    source: local
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [100, 1000, 10000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    control_type: IgG
+                Unt-parR.Unt-IgG:
+                    treatment:
+                        [Unt-parR]
+                    control:
+                        [Unt-IgG]
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    source: local
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [100, 1000, 10000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    control_type: IgG
+                parR-parR.Unt-parR:
+                    treatment:
+                        [parR-parR]
+                    control:
+                        [Unt-parR]
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    source: local
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [100, 1000, 10000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    control_type: untransfected
+                parMR-parR.Unt-parR:
+                    treatment:
+                        [parMR-parR]
+                    control:
+                        [Unt-parR]
+                    SOFA: protein_binding_site
+                    keep_duplicates: False
+                    source: local
+                    hiddendomain_width: [1000]
+                    hiddendomain_p: 0.9
+                    aligner: bowtie2
+                    track_bs: [100, 1000, 10000]
+                    digestion: 'sonication'
+                    is_paired: False
+                    control_type: untransfected
+
+
+use_grey:
+    Unt-parR: False
+
+
+forge:
+    /DATA/usr/emiron/P27_parMRC_spotsep/
+
+
+
+macs2_gsize: 'hs'
+
+blacklist:
+    hg38: /DATA/usr/c.leemans/data/tracks/hg38/hg38_blacklist_ENCFF419RSJ.bed.gz
+
+replicate_cor_method:
+    'pearson'
+
+min_mapq:
+    0
+
+chrom_sizes:
+    hg38: /DATA/data/human/hg38/genome/chromSizes_hg38_LP180129.txt
+
+aligner_index:
+    bowtie2:
+        hg38: '/DATA/data/human/hg38/index/bowtie2/hg38_1-22_XYM'    # hg19: '/DATA/data/bowtie2/hg19_ch1-22_XYM'
+
+chip_genome:
+    - hg38
+
+# domain_means:
+#     LMNB1.5kb: /DATA/usr/t.v.schaik/proj/3D_nucleus/results/ts180110_4DN_DataProcessing/results/HMM/bin-5kb/K562_LMNB1-5kb-combined_HMM.txt.gz
+
+encode_http:
+    https://www.encodeproject.org/files/{enc_id}/@@download/{enc_id}.fastq.gz
